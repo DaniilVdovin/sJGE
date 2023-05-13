@@ -60,7 +60,7 @@ public class Sprite extends Physics {
     public void render(Graphics g){
         if(image == null){
             g.setColor(DefaultColor);
-            g.fillRect((int)position.x,(int)position.y, (int)position.x+Width, (int)position.y+Height);
+            g.fillRect((int)position.x,(int)position.y, Width, Height);
         }else{
             int realX = (int) position.x - Width/2;
             int realY = (int) position.y - Height/2;

@@ -22,8 +22,8 @@ public class Game {
         sprites.add(new Player(-1,200,40));
 
         ParticleSystem flame = new ParticleSystem(20,500,500);
-        sprites.add(flame);
         flame.Create(1,20);
+        sprites.add(flame);
 
         World.curentWorld.sprites.addAll(sprites);
     }

@@ -2,6 +2,7 @@ package org.pixelgame.Engine.object;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -13,17 +14,20 @@ public class ParticleSystem extends Sprite{
     private float LifeTime = 0;
     public ParticleSystem(int id, float posX, float posY) {
         super(id, posX, posY);
-        SetSize(2);
+        _isGravity = false;
+        mass = 0;
+        SetSize(5);
         SetColor(Color.WHITE);
     }
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
+        Random rand = new Random();
         if (Enable) {
-            Random rand = new Random();
-            rand.setSeed(this.hashCode());
             for (Sprite s : Particles) {
-                s.SetSize(10);
+                rand.setSeed(new Date().getTime());
+                s.position.y -= 10*deltaTime;
+                s.position.x -= rand.nextInt(-10,+10)*deltaTime;
                 s.update(deltaTime);
             }
             if(LifeTime<=0) Stop();
@@ -32,8 +36,8 @@ public class ParticleSystem extends Sprite{
     }
     @Override
     public void render(Graphics g) {
+        super.render(g);
         if(Enable) for (Sprite s:Particles) s.render(g);
-        //super.render(g);
     }
     public void Stop(){
         if(!isCreated) throw new RuntimeException("First need Create ParticleSystem");
