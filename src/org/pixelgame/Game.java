@@ -4,11 +4,13 @@ import org.pixelgame.Engine.Core.Vector2;
 import org.pixelgame.Engine.Core.Vector2Int;
 import org.pixelgame.Engine.graphics.Renderer;
 import org.pixelgame.Engine.Particles.ParticleSystem;
+import org.pixelgame.Engine.object.Component;
 import org.pixelgame.Engine.object.Sprite;
 import org.pixelgame.Engine.uitoolkit.CoreUI;
 import org.pixelgame.Engine.uitoolkit.components.Button;
 import org.pixelgame.Engine.uitoolkit.components.Chart;
 import org.pixelgame.Engine.uitoolkit.components.Grid;
+import org.pixelgame.Engine.uitoolkit.components.Series;
 import org.pixelgame.Engine.world.World;
 import org.pixelgame.sprites.Fire;
 import org.pixelgame.sprites.Grass;
@@ -44,7 +46,40 @@ public class Game {
         Button button = new Button(new Vector2Int(25,25));
         button.Text = "Hello!";
         grid.Child.add(button);
+
+
         Chart chart = new Chart(190,80,new Vector2Int(25,50));
+        Series seriesRED = new Series();
+        seriesRED.color = Color.RED;
+        seriesRED.component = new Component() {
+            @Override
+            public void update(float deltaTime) { }
+            @Override
+            public void fixedupdate(float deltaTime) {
+                seriesRED.addData(Renderer.currentFPS);
+            }
+            @Override
+            public void render(Graphics g) {}
+        };
+
+        Series seriesGREEN = new Series();
+        seriesGREEN.color = Color.BLACK;
+        seriesGREEN.component = new Component() {
+            @Override
+            public void update(float deltaTime) {
+                seriesGREEN.addData((int)Math.abs(Math.sin(seriesGREEN.index)*10));
+            }
+            @Override
+            public void fixedupdate(float deltaTime) {
+            }
+            @Override
+            public void render(Graphics g) {}
+        };
+        chart.addSeries(seriesRED);
+        chart.addSeries(seriesGREEN);
+
+
+
         grid.Child.add(button);
         grid.Child.add(chart);
         CoreUI.uiComponents.add(grid);
