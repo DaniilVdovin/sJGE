@@ -44,6 +44,7 @@ public class World {
             for (Sprite sprite : curentWorld.sprites) {
                 sprite.fixedupdate(1f);
             }
+            UI.fixedupdate(1f);
         }
     }
 }

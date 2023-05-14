@@ -21,12 +21,8 @@ public class UIComponent implements Component {
     }
     @Override
     public void update(float deltaTime){for (UIComponent uc:Child)uc.update(deltaTime);}
-
     @Override
-    public void fixedupdate(float deltaTime) {
-
-    }
-
+    public void fixedupdate(float deltaTime) {for (UIComponent uc:Child)uc.fixedupdate(deltaTime);}
     @Override
     public void render(Graphics g) { for (UIComponent uc:Child)uc.render(g);}
     @Override

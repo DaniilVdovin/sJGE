@@ -14,12 +14,8 @@ public class CoreUI implements Component {
     public void update(float deltatime){
         for (UIComponent uc:uiComponents) uc.update(deltatime);
     }
-
     @Override
-    public void fixedupdate(float deltaTime) {
-
-    }
-
+    public void fixedupdate(float deltatime) {for (UIComponent uc:uiComponents) uc.fixedupdate(deltatime);}
     @Override
     public void render(Graphics g){
         for (UIComponent uc:uiComponents) uc.render(g);

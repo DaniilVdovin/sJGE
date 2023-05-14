@@ -16,6 +16,10 @@ public class Grid extends UIComponent {
         super.update(deltatime);
     }
     @Override
+    public void fixedupdate(float deltatime) {
+        super.fixedupdate(deltatime);
+    }
+    @Override
     public void render(Graphics g) {
         super.render(g);
         g.setColor(Color.lightGray);

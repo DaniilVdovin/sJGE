@@ -28,23 +28,23 @@ public class Game {
 
         for (int i = 0; i < 100; i++) {
             sprites.add(new Grass(i, 100+i*25,400+(int)(Math.sin(i)*25)).SetSize(25).SetColor(Color.GREEN));
-            for (int j = 0; j < 10+(int)Math.sin(i+1); j++) {
+            for (int j = 0; j < 30+(int)Math.sin(i+1); j++) {
                 sprites.add(new Grass(i, 100+i*25,400+(int)(Math.sin(i)*25)+(j*25)+25).SetSize(25).SetColor(Color.darkGray));
             }
         }
 
-        sprites.add(new Player(-1,200,40));
+        sprites.add(new Player(-1,1200,40));
 
-        Fire fire = new Fire(20,300,200);
+        Fire fire = new Fire(20,900,200);
         fire.Create(10,20);
         sprites.add(fire);
 
 
-        Grid grid = new Grid(100,200,new Vector2Int(20,20));
+        Grid grid = new Grid(200,150,new Vector2Int(20,20));
         Button button = new Button(new Vector2Int(25,25));
         button.Text = "Hello!";
         grid.Child.add(button);
-        Chart chart = new Chart(95,40,new Vector2Int(25,50));
+        Chart chart = new Chart(190,80,new Vector2Int(25,50));
         grid.Child.add(button);
         grid.Child.add(chart);
         CoreUI.uiComponents.add(grid);

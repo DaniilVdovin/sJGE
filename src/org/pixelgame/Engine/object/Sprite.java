@@ -67,7 +67,6 @@ public class Sprite extends Physics implements Component{
 
     @Override
     public void fixedupdate(float deltaTime) {
-
     }
 
     @Override

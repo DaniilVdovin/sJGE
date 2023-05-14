@@ -16,6 +16,7 @@ import java.io.IOException;
 
 public class Renderer {
     private static boolean DRAW_FPS_COUNTER = true;
+    private static boolean FIX_FRAME_RATE = true;
     public static Camera MainCamera;
     private static CoreUI ui;
     private static Frame frame;
@@ -34,7 +35,7 @@ public class Renderer {
     private static int FrameHeight = 0;
 
     private static long lastFpsCheck = 0;
-    private static int currentFPS = 0;
+    public static int currentFPS = 0;
     private static int totalFrames = 0;
 
     private static void getBestSize(){
@@ -163,7 +164,7 @@ public class Renderer {
                         g.drawImage(vImage, 0, 0, canvasWidth, canvasHeigth, null);
                         g.dispose();
                     }
-                    if (currentFPS>60) {
+                    if (FIX_FRAME_RATE & currentFPS>60) {
                         try {
                             Thread.sleep(10);
                         } catch (InterruptedException e) {
