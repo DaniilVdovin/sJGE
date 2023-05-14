@@ -1,6 +1,7 @@
 package org.pixelgame.Engine.object;
 
 import org.pixelgame.Engine.Core.Vector2;
+import org.pixelgame.Engine.Core.Vector2Int;
 import org.pixelgame.Engine.graphics.Renderer;
 import org.pixelgame.Engine.physics.Physics;
 import org.pixelgame.Engine.world.World;
@@ -16,10 +17,15 @@ public class Sprite extends Physics {
     public int Width = 0,Height = 0;
     public BufferedImage image = null;
     public Color DefaultColor = Color.GREEN;
-    public Sprite(int id,float posX,float posY){
+    public boolean isDebug = true;
+    public Sprite(int id,int posX,int posY){
         this.id = id;
         this.position.x = posX;
         this.position.y = posY;
+    }
+    public Sprite(int id,Vector2Int pos){
+        this.id = id;
+        this.position = pos;
     }
     public Sprite(int id,Vector2 pos){
         this.id = id;
@@ -32,14 +38,12 @@ public class Sprite extends Physics {
         if(_isGravity && !_isGround)
             velocity.y += mass*deltaTime;
         if (Collision) {
+            Rectangle rect = new Rectangle((int) (position.x - Width/ 2),
+                    (int) (position.y + velocity.y * deltaTime - Height / 2), Width, Height);
             for (Sprite sprite : World.curentWorld.sprites) {
                 if (sprite == this) continue;
-                Rectangle rect = new Rectangle((int) (position.x - Width/ 2),
-                        (int) (position.y + velocity.y * deltaTime - Height / 2), Width, Height);
-
                 Rectangle otherRect = new Rectangle((int) (sprite.position.x - sprite.Width / 2)
                         , (int) (sprite.position.y - sprite.Height / 2), sprite.Width, sprite.Height);
-
                 if (rect.intersects(otherRect)) {
                     velocity.y -= velocity.y;
                     _isGround = true;
@@ -58,24 +62,29 @@ public class Sprite extends Physics {
         moveX=0;
     }
     public void render(Graphics g){
+        int realX = (int) position.x - Width/2;
+        int realY = (int) position.y - Height/2;
         if(image == null){
             g.setColor(DefaultColor);
-            g.fillRect((int)position.x,(int)position.y, Width, Height);
+            g.fillRect(realX,realY, Width, Height);
         }else{
-            int realX = (int) position.x - Width/2;
-            int realY = (int) position.y - Height/2;
-            g.drawImage(image,realX,realY,Width,Height,null);
+            g.drawImage(image, realX, realY,Width,Height,null);
+        }
+        if(isDebug)
+        {
+            g.setColor(Color.RED);
+            g.drawRect(realX,realY, Width, Height);
         }
     }
     public void SetSize(int width, int height){
         Width = width; Height = height;
-        image = null;
     }
     public void SetSize(int size){
         SetSize(size,size);
     }
     public void SetColor(Color color){
         DefaultColor = color;
+        image = null;
     }
     public void SetImage(String path){
         try {

@@ -13,9 +13,7 @@ import java.awt.image.VolatileImage;
 import java.io.IOException;
 
 public class Renderer {
-
     private static boolean DRAW_FPS_COUNTER = true;
-
 
     private static Frame frame;
     private static Canvas canvas;
@@ -103,10 +101,8 @@ public class Renderer {
     private static void startRendering(){
         Thread thread = new Thread(){
             public void run(){
-
                 GraphicsConfiguration gc = canvas.getGraphicsConfiguration();
                 VolatileImage vImage = gc.createCompatibleVolatileImage(GameWidth,GameHeight);
-
                 while (true){
                     //FPS counter
                     totalFrames++;
