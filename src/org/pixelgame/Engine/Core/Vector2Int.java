@@ -26,7 +26,6 @@ public class Vector2Int extends Vector2{
         x+=b.x;y+=b.y;
         return this;
     }
-
     @Override
     public Vector2Int plusY(int b) {
         return new Vector2Int(x,y+b);
@@ -43,5 +42,12 @@ public class Vector2Int extends Vector2{
     @Override
     public Vector2Int minusX(int b) {
         return new Vector2Int(x-b,y);
+    }
+    public Vector2Int minusY(int b){
+        return new Vector2Int(x,y-b);
+    }
+    @Override
+    public String toString() {
+        return "("+ x +", " + y +')';
     }
 }

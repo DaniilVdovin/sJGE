@@ -9,7 +9,6 @@ public class Grass extends Sprite {
     public Grass(int id, int posX, int posY) {
         super(id, posX, posY);
         SetImage("/image/grass.jpg");
-        SetSize(25,25);
     }
     @Override
     public void update(float deltaTime) {

@@ -57,8 +57,7 @@ public class ParticleSystem extends Sprite {
     public void render(Graphics g) {
         super.render(g);
         if(isDebug){
-            Vector2Int pos = position.toInt().plusY(10).minusX(10);
-            Text stats = new Text(pos);
+            Text stats = new Text(position.toInt().plusY(10).minusX(10));
             stats.Text.append("Particles: ").append(Particles.size()).append("\n")
                       .append("Duration: ").append(duration).append("\n")
                       .append("TDuration: ").append((int)temp_duration).append("\n");

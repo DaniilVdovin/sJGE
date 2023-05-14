@@ -1,20 +1,16 @@
 package org.pixelgame.Engine.input;
+import org.pixelgame.Engine.Core.Vector2Int;
+import java.awt.event.*;
+public class Input implements KeyListener, MouseMotionListener {
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+    private static final boolean[] currentKeys =  new boolean[196];
+    private static final Vector2Int MousePosition = Vector2Int.Zero();
 
-public class Input implements KeyListener, MouseListener {
-
-    private static boolean[] currentKeys =  new boolean[196];
-    private static boolean MousePressed = false;
-
+    public static Vector2Int getMousePosition(){
+        return MousePosition;
+    }
     public  static boolean getKey(int keyCode){
         return currentKeys[keyCode];
-    }
-    public  static boolean getMouse(){
-        return MousePressed;
     }
     @Override public void keyTyped(KeyEvent e) {
 
@@ -25,13 +21,14 @@ public class Input implements KeyListener, MouseListener {
     @Override public void keyReleased(KeyEvent e) {
         currentKeys[e.getKeyCode()] = false;
     }
-    @Override public void mouseClicked(MouseEvent e) {}
-    @Override public void mousePressed(MouseEvent e) {MousePressed = true;}
-    @Override public void mouseReleased(MouseEvent e) {MousePressed = false;}
-    @Override public void mouseEntered(MouseEvent e) {
-
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        MousePosition.x = e.getX();
+        MousePosition.y = e.getY();
     }
-    @Override public void mouseExited(MouseEvent e) {
-
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        MousePosition.x = e.getX();
+        MousePosition.y = e.getY();
     }
 }

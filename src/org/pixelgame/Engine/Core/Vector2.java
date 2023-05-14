@@ -19,7 +19,6 @@ public class Vector2{
     public static Vector2 One(){
         return new Vector2(1,1);
     }
-
     //PLUS
     public Vector2 plusEquals(Vector2 b){
         x+=b.x;y+=b.y; return this;
@@ -27,7 +26,6 @@ public class Vector2{
     public Vector2 plusEquals(int b){
         x+=b;y+=b; return this;
     }
-
     public Vector2 plus(Vector2 b){
        return new Vector2(x+b.x,y+b.y);
     }
@@ -40,7 +38,6 @@ public class Vector2{
     public Vector2 plusY(int b){
         return new Vector2(x,y+b);
     }
-
     //MINUS
     public Vector2 minusEquals(Vector2 b){
         x-=b.x;y-=b.y; return this;
@@ -48,7 +45,6 @@ public class Vector2{
     public Vector2 minusEquals(int b){
         x-=b;y-=b; return this;
     }
-
     public Vector2 minus(Vector2 b){
         return new Vector2(x-b.x,y-b.y);
     }
@@ -60,5 +56,15 @@ public class Vector2{
     }
     public Vector2 minusY(int b){
         return new Vector2(x,y-b);
+    }
+    public static Vector2 Lerp(Vector2 firstVector, Vector2 secondVector, float by)
+    {
+        float retX = firstVector.x * (1 - by) + secondVector.x * by;
+        float retY = firstVector.y * (1 - by) + secondVector.y * by;
+        return new Vector2(retX, retY);
+    }
+    @Override
+    public String toString() {
+        return "("+ x +", " + y +')';
     }
 }

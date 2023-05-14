@@ -19,7 +19,6 @@ public class Text extends Sprite{
     }
     @Override
     public void render(Graphics g) {
-        super.render(g);
         g.setColor(Color.GREEN);
         for (String line : Text.toString().split("\n"))
             g.drawString(line, position.x, position.y += g.getFontMetrics().getHeight());
