@@ -3,6 +3,9 @@ package org.pixelgame.Engine.Particles;
 import org.pixelgame.Engine.Core.Vector2;
 import org.pixelgame.Engine.Core.Vector2Int;
 import org.pixelgame.Engine.object.Sprite;
+import org.pixelgame.Engine.physics.Collision;
+import org.pixelgame.Engine.physics.Gravity;
+
 import java.awt.*;
 
 public class Particle extends Sprite {
@@ -12,20 +15,24 @@ public class Particle extends Sprite {
     }
     public Particle(int id, Vector2 pos, boolean Gravity, boolean Collision, Color color, int Size, float lifeTime) {
         super(id, pos);
-        this.Collision = Collision;
-        SetGravity(Gravity);
         SetColor(color);
         SetSize(Size);
         this.lifeTime = lifeTime;
+
+        if(Gravity) components.add(new Gravity(this));
+        if(Collision) components.add(new Collision(this));
     }
 
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        if(isAlive()) lifeTime-=deltaTime;
+        if(isAlive()){
+            lifeTime-=deltaTime;
+            SetSize(Width-(int)(Width/lifeTime));
+        }
     }
 
     public boolean isAlive(){
-        return lifeTime>0;
+        return lifeTime<=0;
     }
 }

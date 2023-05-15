@@ -3,21 +3,24 @@ package org.pixelgame.Engine.object;
 import org.pixelgame.Engine.Core.Vector2;
 import org.pixelgame.Engine.Core.Vector2Int;
 import org.pixelgame.Engine.graphics.Renderer;
+import org.pixelgame.Engine.physics.Gravity;
 import org.pixelgame.Engine.physics.Physics;
 import org.pixelgame.Engine.world.World;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Sprite extends Physics implements Component{
     public int id = 0;
     public Vector2 position = Vector2.Zero();
-    public float moveX = 0;
     public int Width = 0,Height = 0;
     public BufferedImage image = null;
     public Color DefaultColor = Color.GREEN;
     public boolean isDebug = true;
+    public ArrayList<Component> components = new ArrayList<>();
+    public ArrayList<Sprite> Child = new ArrayList<>();
     public Sprite(int id,int posX,int posY){
         this.id = id;
         this.position.x = posX;
@@ -31,42 +34,19 @@ public class Sprite extends Physics implements Component{
         this.id = id;
         this.position = pos;
     }
-    public Sprite SetGravity(boolean value){
-        _isGravity = value;
-        return this;
-    }
 
     @Override
     public void update(float deltaTime){
-        if(_isGravity && !_isGround)
-            velocity.y += mass*deltaTime;
-        if (Collision) {
-            Rectangle rect = new Rectangle((int) (position.x - Width/ 2),
-                    (int) (position.y + velocity.y * deltaTime - Height / 2), Width, Height);
-            for (Sprite sprite : World.curentWorld.sprites) {
-                if (sprite == this) continue;
-                Rectangle otherRect = new Rectangle((int) (sprite.position.x - sprite.Width / 2)
-                        , (int) (sprite.position.y - sprite.Height / 2), sprite.Width, sprite.Height);
-                if (!_isGround & rect.intersects(otherRect)) {
-                    velocity.y -= velocity.y;
-                    _isGround = true;
-                } else {
-                    _isGround = false;
-                }
-                rect = new Rectangle((int) (position.x - Width / 2),
-                        (int) (position.y + velocity.y * deltaTime - Height / 2), Width, Height);
-                if (rect.intersects(otherRect)) {
-                    moveX -= moveX;
-                }
-            }
-        }
+        for (Component c:components) c.update(deltaTime);
+        for (Component c:Child) c.update(deltaTime);
         position.y+=velocity.y*deltaTime;
-        position.x+=moveX*deltaTime;
-        moveX=0;
+        position.x+=velocity.x*deltaTime;
     }
 
     @Override
     public void fixedupdate(float deltaTime) {
+        for (Component c:components) c.fixedupdate(deltaTime);
+        for (Component c:Child) c.fixedupdate(deltaTime);
     }
 
     @Override
@@ -79,11 +59,8 @@ public class Sprite extends Physics implements Component{
         }else{
             g.drawImage(image, realX, realY,Width,Height,null);
         }
-        if(isDebug)
-        {
-            g.setColor(Collision?Color.GREEN:Color.RED);
-            g.drawRect(realX,realY, Width, Height);
-        }
+        for (Component c:components) c.render(g);
+        for (Component c:Child) c.render(g);
     }
     public Sprite SetSize(int width, int height){
         Width = width; Height = height;

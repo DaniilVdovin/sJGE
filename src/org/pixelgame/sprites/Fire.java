@@ -6,8 +6,8 @@ import org.pixelgame.Engine.Particles.IParticleAction;
 import org.pixelgame.Engine.Particles.ParticleSystem;
 
 public class Fire extends ParticleSystem {
-    public Fire(int id, int posX, int posY) {
-        super(id, posX, posY);
+    public Fire(int id, Vector2Int pos, int duration) {
+        super(id, pos, duration);
         isDebug = true;
         SetAction(new IParticleAction() {
             @Override

@@ -16,10 +16,14 @@ public class ParticleSystem extends Sprite {
     private boolean isCreated = false;
     private IParticleAction action;
     private final float duration;
+    private int emut_count;
     private float temp_duration;
     public  boolean isDebug = false;
     public ParticleSystem(){
         this(0,0,0,10);
+    }
+    public ParticleSystem(int id,Vector2Int pos,float duration){
+        this(id,pos.x,pos.y,duration);
     }
     public ParticleSystem(int id, int posX, int posY) {
         this(id,posX,posY,10);
@@ -48,7 +52,7 @@ public class ParticleSystem extends Sprite {
             }
             temp_duration -= deltaTime;
             if(temp_duration<=0) {
-                Emit(10, 10);
+                Emit(emut_count, duration);
                 temp_duration = duration;
             }
         }
@@ -85,6 +89,7 @@ public class ParticleSystem extends Sprite {
     public void Create(int count,float lifeTime){
         if(isCreated) Stop();
         Enable = true;
+        emut_count = count;
         Emit(count,lifeTime);
         isCreated = true;
     }
@@ -95,11 +100,11 @@ public class ParticleSystem extends Sprite {
             rand.setSeed(new Date().getTime());
             Particle p =
                     new Particle(i
-                            ,position.plusX(rand.nextInt(-10,10))
-                            ,false
+                            ,position.plusX(rand.nextInt(20)-10)
+                            ,true
                             ,false
                             ,Color.RED
-                            ,rand.nextInt(5,20),
+                            ,rand.nextInt(25)-5,
                             lt);
             temp.add(p);
         }

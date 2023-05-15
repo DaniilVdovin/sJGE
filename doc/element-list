@@ -5,5 +5,7 @@ org.pixelgame.Engine.input
 org.pixelgame.Engine.object
 org.pixelgame.Engine.Particles
 org.pixelgame.Engine.physics
+org.pixelgame.Engine.uitoolkit
+org.pixelgame.Engine.uitoolkit.components
 org.pixelgame.Engine.world
 org.pixelgame.sprites

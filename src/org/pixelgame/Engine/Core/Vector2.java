@@ -4,6 +4,9 @@ public class Vector2{
     public Vector2() {
         this(0,0);
     }
+    public Vector2(Vector2 value) {
+        this(value.x, value.y);
+    }
     public Vector2(int x, int y) {
         this((float) x,(float) y);
     }
@@ -62,6 +65,9 @@ public class Vector2{
         float retX = firstVector.x * (1 - by) + secondVector.x * by;
         float retY = firstVector.y * (1 - by) + secondVector.y * by;
         return new Vector2(retX, retY);
+    }
+    public Vector2 clone(){
+        return new Vector2(this);
     }
     @Override
     public String toString() {
