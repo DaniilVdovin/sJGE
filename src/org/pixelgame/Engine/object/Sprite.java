@@ -1,8 +1,10 @@
 package org.pixelgame.Engine.object;
 
+import org.pixelgame.Engine.Core.ComponentList;
 import org.pixelgame.Engine.Core.Vector2;
 import org.pixelgame.Engine.Core.Vector2Int;
 import org.pixelgame.Engine.graphics.Renderer;
+import org.pixelgame.Engine.physics.Collision;
 import org.pixelgame.Engine.physics.Gravity;
 import org.pixelgame.Engine.physics.Physics;
 import org.pixelgame.Engine.world.World;
@@ -10,7 +12,9 @@ import org.pixelgame.Engine.world.World;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.net.Proxy;
+import java.util.*;
+import java.util.List;
 
 public class Sprite extends Physics implements Component{
     public int id = 0;
@@ -18,8 +22,8 @@ public class Sprite extends Physics implements Component{
     public int Width = 0,Height = 0;
     public BufferedImage image = null;
     public Color DefaultColor = Color.GREEN;
-    public boolean isDebug = true;
-    public ArrayList<Component> components = new ArrayList<>();
+    public boolean isDebug = false;
+    public ComponentList components = new ComponentList();
     public ArrayList<Sprite> Child = new ArrayList<>();
     public Sprite(int id,int posX,int posY){
         this.id = id;
@@ -61,6 +65,13 @@ public class Sprite extends Physics implements Component{
         }
         for (Component c:components) c.render(g);
         for (Component c:Child) c.render(g);
+
+        if(isDebug)
+        {
+            Text debug = new Text(position.clone().minusY(Height*2).minusX(Width).toInt());
+            debug.Text.append(velocity.toString());
+            debug.render(g);
+        }
     }
     public Sprite SetSize(int width, int height){
         Width = width; Height = height;

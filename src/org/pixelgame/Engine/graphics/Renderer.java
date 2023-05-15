@@ -1,5 +1,6 @@
 package org.pixelgame.Engine.graphics;
 
+import org.pixelgame.Engine.Core.GameApplication;
 import org.pixelgame.Engine.Core.Vector2;
 import org.pixelgame.Engine.Core.Vector2Int;
 import org.pixelgame.Engine.uitoolkit.CoreUI;
@@ -16,7 +17,7 @@ import java.io.IOException;
 
 public class Renderer {
     private static boolean DRAW_FPS_COUNTER = true;
-    private static boolean FIX_FRAME_RATE = true;
+    public static boolean FIX_FRAME_RATE = true;
     public static Camera MainCamera;
     private static CoreUI ui;
     private static Frame frame;
@@ -100,7 +101,7 @@ public class Renderer {
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                Game.quit();
+                GameApplication.quit();
             }
         });
         frame.addComponentListener(new ComponentAdapter() {

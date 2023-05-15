@@ -14,8 +14,8 @@ public class Grass extends Sprite {
     public Grass(int id, int posX, int posY) {
         super(id, posX, posY);
         SetImage("/image/grass.jpg");
-        mass = 100;
         components.add(mouseOver);
+        _isStatic = true;
     }
     @Override
     public void update(float deltaTime) {

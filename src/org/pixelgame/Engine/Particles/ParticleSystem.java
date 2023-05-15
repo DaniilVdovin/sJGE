@@ -42,10 +42,11 @@ public class ParticleSystem extends Sprite {
         if (Enable) {
             for (Iterator<Particle> particleIterator = Particles.iterator();particleIterator.hasNext();){
                 Particle p = particleIterator.next();
-                p.position = action.Action(p.position,deltaTime);
+                if(action!=null) p.position = action.Action(p.position,deltaTime);
                 if(p.isAlive()){
-                    action.Destroy(true);
+                    if(action!=null) action.Destroy(true);
                     particleIterator.remove();
+                    Particles.remove(p);
                     continue;
                 }
                 p.update(deltaTime);

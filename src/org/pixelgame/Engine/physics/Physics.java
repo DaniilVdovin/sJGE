@@ -5,6 +5,7 @@ import org.pixelgame.Engine.object.Component;
 
 public abstract class Physics implements Component {
     public boolean _isBounds = true;
+    public boolean _isStatic = false;
     protected boolean _isGravity = false;
     public boolean _isGround = false;
     protected boolean Collision = false;

@@ -18,8 +18,7 @@ public class Particle extends Sprite {
         SetColor(color);
         SetSize(Size);
         this.lifeTime = lifeTime;
-
-        if(Gravity) components.add(new Gravity(this));
+        if(Gravity)   components.add(new Gravity(this));
         if(Collision) components.add(new Collision(this));
     }
 
@@ -28,7 +27,7 @@ public class Particle extends Sprite {
         super.update(deltaTime);
         if(isAlive()){
             lifeTime-=deltaTime;
-            SetSize(Width-(int)(Width/lifeTime));
+            SetSize(Width-(int)((Width/lifeTime)*deltaTime));
         }
     }
 

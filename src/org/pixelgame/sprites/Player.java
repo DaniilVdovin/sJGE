@@ -16,7 +16,7 @@ import static org.pixelgame.Engine.graphics.Renderer.MainCamera;
 public class Player extends Mob {
     public Player(int id, int posX, int posY) {
         super(id, posX, posY);
-        mass = 50;
+        mass = 100;
         SetSize(10,20);
         SetColor(Color.WHITE);
         //SetImage("/image/player.png");

@@ -1,5 +1,6 @@
 package org.pixelgame.Engine.world;
 
+import org.pixelgame.Engine.Core.GameApplication;
 import org.pixelgame.Engine.Core.Logger;
 import org.pixelgame.Engine.Core.Vector2Int;
 import org.pixelgame.Engine.graphics.Renderer;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 
 public class World {
     public static World curentWorld = null;
+    public static GameApplication App;
     private static long lastTime = 0;
 
     public ArrayList<Sprite> sprites = new ArrayList<Sprite>();
@@ -25,6 +27,7 @@ public class World {
                 sprite.update(deltaTime);
             }
             UI.update(deltaTime);
+            App.update(deltaTime);
         }
     }
     public static void render(Graphics g){
@@ -32,6 +35,7 @@ public class World {
             for(Sprite sprite : curentWorld.sprites){
                 sprite.render(g);
             }
+            App.render(g);
         }catch (Exception e){
             System.out.println(e.fillInStackTrace());
         }
@@ -45,6 +49,7 @@ public class World {
                 sprite.fixedupdate(1f);
             }
             UI.fixedupdate(1f);
+            App.fixedupdate(1f);
         }
     }
 }

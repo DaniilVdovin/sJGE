@@ -23,7 +23,7 @@ public class Gravity implements Component {
     @Override
     public void update(float deltaTime) {
         if(isEnable) {
-            if(!Object._isGround)
+            if(!Object._isGround & !Object._isStatic)
                 Object.velocity.y += Object.mass*deltaTime;
         }
     }

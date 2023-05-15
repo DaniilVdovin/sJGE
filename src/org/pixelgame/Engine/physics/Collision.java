@@ -39,19 +39,18 @@ public class Collision implements Component {
                         , (int) (sprite.position.y - sprite.Height / 2), sprite.Width, sprite.Height);
                 if (rect.intersects(otherRect)) {
                     Object._isGround = true;
-                    if (sprite.mass <= Object.mass) {
-                        sprite.velocity.y += (Object.velocity.y / sprite.mass - Object.mass)*(sprite.position.y<Object.position.y?1:-1);
+                    if (!sprite._isStatic & sprite.mass <= Object.mass) {
+                        sprite.velocity.y += (Object.velocity.y)*deltaTime*(sprite.position.y<Object.position.y?1:-1);
                     }
                     Object.velocity.y -= Object.velocity.y;
                 }
                 rect = new Rectangle((int) (Object.position.x + Object.velocity.x * deltaTime - Object.Width / 2),
                         (int) (Object.position.y - Object.Height / 2), Object.Width, Object.Height);
                 if (rect.intersects(otherRect)) {
-                    if (sprite.mass <= Object.mass) {
-                        sprite.velocity.x += (Object.velocity.x / sprite.mass - Object.mass)*(sprite.position.x<Object.position.x?1:-1);
-                        Object.velocity.x -= (Object.velocity.x / sprite.mass - Object.mass)*(sprite.position.x<Object.position.x?1:-1);
-                    } else
-                        Object.velocity.x -= Object.velocity.x;
+                    if (!sprite._isStatic & sprite.mass <= Object.mass) {
+                        sprite.velocity.x += ((Object.velocity.x/2)/((float) (sprite.mass + Object.mass) /50));
+                    }
+                    Object.velocity.x -= Object.velocity.x;
                 }
             }
             Object.velocity.x -= Object.velocity.x*deltaTime;
