@@ -1,9 +1,9 @@
 package org.pixelgame.Engine.Core;
 
-import org.pixelgame.Engine.object.Component;
+import org.pixelgame.Engine.world.IUpdatable;
 
 import java.util.ArrayList;
 
-public class ComponentList extends ArrayList<Component> {
+public class ComponentList extends ArrayList<IUpdatable> {
 
 }

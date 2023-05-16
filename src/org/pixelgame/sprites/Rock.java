@@ -2,20 +2,21 @@ package org.pixelgame.sprites;
 
 import org.pixelgame.Engine.Core.Vector2;
 import org.pixelgame.Engine.object.Sprite;
-import org.pixelgame.Engine.physics.Collision;
-import org.pixelgame.Engine.physics.Gravity;
 
 import java.awt.*;
 
 public class Rock extends Sprite {
-    public Rock(int id, int posX, int posY) {
-        this(posX,posY);
+
+    /**
+     * Constructor
+     *
+     * @param id
+     * @param pos
+     */
+    public Rock(int id, Vector2<Integer> pos) {
+        super(id, pos);
     }
-    public Rock(int posX, int posY){
-        super(0, posX, posY);
-        mass = 1;
-        _isStatic = true;
-    }
+
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);

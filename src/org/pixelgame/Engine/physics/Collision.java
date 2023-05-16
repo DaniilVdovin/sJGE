@@ -1,68 +1,58 @@
 package org.pixelgame.Engine.physics;
 
-import org.pixelgame.Engine.Core.Vector2;
-import org.pixelgame.Engine.object.Component;
+import org.pixelgame.Engine.object.IComponent;
 import org.pixelgame.Engine.object.Sprite;
+import org.pixelgame.Engine.world.IUpdatable;
 import org.pixelgame.Engine.world.World;
 
 import java.awt.*;
 
-public class Collision implements Component {
-    public boolean isEnable = true;
-    public Sprite Object;
-    public boolean isDebug = true;
-    public boolean isInterset = false;
-    public Collision(Sprite object) {
-        this(true, object, false);
+public class Collision implements IComponent, IUpdatable {
+    private final Sprite _parent;
+    private final Physics _physics;
+    public boolean isEnable;
+    public Collision(Sprite parent) {
+        this(true, parent);
     }
-
-    public Collision(Sprite object, boolean isDebug) {
-        this(true, object, isDebug);
-    }
-
-    public Collision(boolean isEnable, Sprite object, boolean isDebug) {
+    public Collision(boolean isEnable, Sprite parent) {
         this.isEnable = isEnable;
-        Object = object;
-        this.isDebug = isDebug;
+        _parent = parent;
+        this._physics = (Physics) _parent.GetComponent(Physics.class);
+        if (this._physics == null) throw new RuntimeException("Need Add Physics");
     }
 
+    // FIXME: 17.05.2023 
     @Override
     public void update(float deltaTime) {
-
         if (isEnable) {
-            Object._isGround = false;
+            _physics._isGround = false;
             for (Sprite sprite : World.curentWorld.sprites) {
-                if (sprite == Object) continue;
-                if (!sprite._isBounds) continue;
-
-                //RECT
-                Rectangle rect = new Rectangle((int) (Object.position.x - Object.Width / 2),
-                        (int) (Object.position.y + Object.velocity.y * deltaTime - Object.Height / 2), Object.Width, Object.Height);
-                //idk
-
+                Physics sp = ((Physics)sprite.GetComponent(Physics.class));
+                if(sp == null) continue;
+                if (sprite == _parent) continue;
+                if (!_physics._isBounds) continue;
+                Rectangle rect = new Rectangle((int) (_parent.position.x - _parent.Width / 2),
+                        (int) (_parent.position.y + _physics.velocity.y * deltaTime - _parent.Height / 2), _parent.Width, _parent.Height);
                 Rectangle otherRect = new Rectangle((int) (sprite.position.x - sprite.Width / 2)
                         , (int) (sprite.position.y - sprite.Height / 2), sprite.Width, sprite.Height);
-                //check TODO:Узнать почему это работает. ещё надо сделать лучше по хорошему поправить компонент лист
-                isInterset = rect.intersects(otherRect);
-                if (isInterset) {
-                    Object._isGround = true;
-                    if (!sprite._isStatic & sprite.mass <= Object.mass) {
-                        sprite.velocity.y += (Object.velocity.y)*deltaTime*(sprite.position.y<Object.position.y?1:-1);
+                if (rect.intersects(otherRect)) {
+                    _physics._isGround = true;
+
+                    if (!sp._isStatic & sp.mass <= _physics.mass) {
+                        sp.velocity.y += (_physics.velocity.y)*deltaTime*(sprite.position.y< _parent.position.y?1:-1);
                     }
-                    Object.velocity.y -= Object.velocity.y;
+                    _physics.velocity.y -= _physics.velocity.y;
                 }
-                rect = new Rectangle((int) (Object.position.x + Object.velocity.x * deltaTime - Object.Width / 2),
-                        (int) (Object.position.y - Object.Height / 2), Object.Width, Object.Height);
-                //check
-                if (isInterset) {
-                    //check
-                    if (!sprite._isStatic & sprite.mass <= Object.mass) {
-                        sprite.velocity.x += ((Object.velocity.x/2)/((float) (sprite.mass + Object.mass) /50));
+                rect = new Rectangle((int) (_parent.position.x + _physics.velocity.x * deltaTime - _parent.Width / 2),
+                        (int) (_parent.position.y - _parent.Height / 2), _parent.Width, _parent.Height);
+                if (rect.intersects(otherRect)) {
+                    if (!sp._isStatic & sp.mass <= _physics.mass) {
+                        sp.velocity.x += ((_physics.velocity.x/2)/((float) (sp.mass + _physics.mass) /50));
                     }
-                    Object.velocity.x -= Object.velocity.x;
+                    _physics.velocity.x -= _physics.velocity.x;
                 }
             }
-            Object.velocity.x -= Object.velocity.x*deltaTime;
+            _physics.velocity.x -= _physics.velocity.x*deltaTime;
         }
     }
     @Override
@@ -70,20 +60,10 @@ public class Collision implements Component {
 
     }
     @Override
-    public void render(Graphics g) {
-        if(isDebug)
-        {
-            int realX = (int) Object.position.x - Object.Width/2;
-            int realY = (int) Object.position.y - Object.Height/2;
-            g.setColor(Color.GREEN);
-            g.drawRect(realX,realY, Object.Width, Object.Height);
+    public void render(Graphics g) { }
 
-            g.setColor(Color.ORANGE);
-            g.drawRect((int) (Object.position.x - Object.Width / 2),
-                       (int) (Object.position.y + Object.velocity.y * 0.2f), Object.Width, Object.Height/2);
-            g.setColor(Color.red);
-            g.drawRect((int) (Object.position.x+ Object.velocity.x * 0.2f - Object.Width / 2),
-                       (int) (Object.position.y - Object.Height / 2), Object.Width, Object.Height);
-        }
+    @Override
+    public Sprite GetParent() {
+        return _parent;
     }
 }

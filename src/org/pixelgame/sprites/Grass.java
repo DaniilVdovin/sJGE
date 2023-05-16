@@ -1,21 +1,20 @@
 package org.pixelgame.sprites;
 
-import org.pixelgame.Engine.graphics.Renderer;
-import org.pixelgame.Engine.input.MouseOver;
+import org.pixelgame.Engine.Core.Vector2;
+import org.pixelgame.Engine.graphics.SpriteImage;
 import org.pixelgame.Engine.object.Sprite;
 import org.pixelgame.Engine.physics.Collision;
-import org.pixelgame.Engine.physics.Gravity;
+import org.pixelgame.Engine.physics.Physics;
 
 import java.awt.*;
-import java.io.IOException;
 
 public class Grass extends Sprite {
-    MouseOver mouseOver = new MouseOver();
-    public Grass(int id, int posX, int posY) {
-        super(id, posX, posY);
-        SetImage("/image/grass.jpg");
-        components.add(mouseOver);
-        _isStatic = true;
+    Physics physics;
+    public Grass(int id, Vector2<Integer> pos) {
+        super(id, pos);
+        SetImage(new SpriteImage("/image/grass.jpg"));
+        physics = (Physics) AddComponent(new Physics(this));
+        physics._isStatic = true;
     }
     @Override
     public void update(float deltaTime) {
@@ -24,9 +23,5 @@ public class Grass extends Sprite {
     @Override
     public void render(Graphics g){
         super.render(g);
-        if(mouseOver.isHover){
-            g.setColor(Color.WHITE);
-            g.drawRect((int) position.x, (int) position.y,Width,Height);
-        }
     }
 }

@@ -1,7 +1,6 @@
 package org.pixelgame.Engine.Particles;
 
 import org.pixelgame.Engine.Core.Vector2;
-import org.pixelgame.Engine.Core.Vector2Int;
 
 public interface IParticleAction{
     //Action call in update for move particle

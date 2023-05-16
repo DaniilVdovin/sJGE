@@ -1,13 +1,14 @@
 package org.pixelgame.Engine.input;
 
-import org.pixelgame.Engine.object.Component;
-import org.w3c.dom.css.Rect;
+import org.pixelgame.Engine.object.IComponent;
+import org.pixelgame.Engine.object.Sprite;
+import org.pixelgame.Engine.world.IUpdatable;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class MouseOver implements Component, MouseListener {
+public class MouseOver implements IComponent, MouseListener, IUpdatable {
     public boolean isHover = false;
     public Rectangle rect;
     @Override
@@ -47,5 +48,10 @@ public class MouseOver implements Component, MouseListener {
     @Override
     public void render(Graphics g) {
 
+    }
+
+    @Override
+    public Sprite GetParent() {
+        return null;
     }
 }

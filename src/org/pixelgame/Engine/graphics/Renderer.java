@@ -2,9 +2,7 @@ package org.pixelgame.Engine.graphics;
 
 import org.pixelgame.Engine.Core.GameApplication;
 import org.pixelgame.Engine.Core.Vector2;
-import org.pixelgame.Engine.Core.Vector2Int;
 import org.pixelgame.Engine.uitoolkit.CoreUI;
-import org.pixelgame.Game;
 import org.pixelgame.Engine.input.Input;
 import org.pixelgame.Engine.world.World;
 
@@ -14,6 +12,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.VolatileImage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Renderer {
     private static boolean DRAW_FPS_COUNTER = true;
@@ -71,7 +70,7 @@ public class Renderer {
         FrameHeight = frame.getHeight();
         FrameWidth = frame.getWidth();
 
-        MainCamera.offSet = new Vector2(FrameWidth/2,FrameHeight/2);
+        MainCamera.offSet = new Vector2<>(FrameWidth/2,FrameHeight/2).toFloat();
     }
 
     private static void makeFullScreen(){
@@ -141,7 +140,7 @@ public class Renderer {
                         Graphics g = vImage.getGraphics();
                         g.setColor(Color.BLACK);
                         g.fillRect(0, 0, canvasWidth, canvasHeigth);
-                        Vector2Int trans = MainCamera.GetTranslate().toInt();
+                        Vector2<Integer> trans = MainCamera.GetTranslate();
 
                         g.translate(-trans.x, -trans.y);
                         //RENDER STUFF
@@ -178,13 +177,10 @@ public class Renderer {
         thread.setName("Rendering Thread");
         thread.start();
     }
-
     public static BufferedImage loadImage(String path) throws IOException {
-        BufferedImage rawImage = ImageIO.read(Renderer.class.getResource(path));
+        BufferedImage rawImage = ImageIO.read(Objects.requireNonNull(Renderer.class.getResource(path)));
         BufferedImage finalImage = canvas.getGraphicsConfiguration().createCompatibleImage(rawImage.getWidth(),rawImage.getHeight(),rawImage.getTransparency());
-
         finalImage.getGraphics().drawImage(rawImage,0,0,rawImage.getWidth(),rawImage.getHeight(),null);
-
         return finalImage;
     }
 }

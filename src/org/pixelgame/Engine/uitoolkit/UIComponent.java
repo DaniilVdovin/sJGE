@@ -1,19 +1,20 @@
 package org.pixelgame.Engine.uitoolkit;
 import org.pixelgame.Engine.Core.Vector2;
-import org.pixelgame.Engine.Core.Vector2Int;
-import org.pixelgame.Engine.object.Component;
+import org.pixelgame.Engine.object.IComponent;
+import org.pixelgame.Engine.object.Sprite;
+import org.pixelgame.Engine.world.IUpdatable;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UIComponent implements Component {
+public class UIComponent implements IComponent, IUpdatable {
     public int   Layer;
     public int Width,Height;
-    public Vector2Int position;
+    public Vector2<Integer> position;
     public List<UIComponent> Child = new ArrayList<>();
 
-    public UIComponent(int layer, int width, int height, Vector2Int position) {
+    public UIComponent(int layer, int width, int height, Vector2<Integer> position) {
         Layer = layer;
         Width = width;
         Height = height;
@@ -28,5 +29,10 @@ public class UIComponent implements Component {
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj);
+    }
+
+    @Override
+    public Sprite GetParent() {
+        return null;
     }
 }

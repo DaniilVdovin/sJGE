@@ -1,7 +1,6 @@
 package org.pixelgame.Engine.uitoolkit.components;
 
-import org.pixelgame.Engine.Core.Vector2Int;
-import org.pixelgame.Engine.object.Component;
+import org.pixelgame.Engine.Core.Vector2;
 import org.pixelgame.Engine.uitoolkit.UIComponent;
 
 import java.awt.*;
@@ -10,7 +9,7 @@ import java.util.List;
 
 public class Chart extends UIComponent {
     private List<Series> ListSeries;
-    public Chart(int width, int height, Vector2Int position) {
+    public Chart(int width, int height, Vector2<Integer> position) {
         super(1, width, height, position);
         ListSeries = new ArrayList<>(1);
     }

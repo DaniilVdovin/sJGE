@@ -1,13 +1,13 @@
 package org.pixelgame.Engine.uitoolkit.components;
 
-import org.pixelgame.Engine.object.Component;
+import org.pixelgame.Engine.world.IUpdatable;
 
 import java.awt.*;
 import java.util.List;
 public class Series {
     public int index = 0;
     int Max,Min;
-    public Component component;
+    public IUpdatable component;
     List<Integer> data;
     public Color color;
     public void addData(int value){

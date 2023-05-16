@@ -1,12 +1,13 @@
 package org.pixelgame.Engine.input;
-import org.pixelgame.Engine.Core.Vector2Int;
+import org.pixelgame.Engine.Core.Vector2;
+
 import java.awt.event.*;
 public class Input implements KeyListener, MouseMotionListener {
 
     private static final boolean[] currentKeys =  new boolean[196];
-    private static final Vector2Int MousePosition = Vector2Int.Zero();
+    private static final Vector2<Integer> MousePosition = new Vector2<>(0,0);
 
-    public static Vector2Int getMousePosition(){
+    public static Vector2<Integer> getMousePosition(){
         return MousePosition;
     }
     public  static boolean getKey(int keyCode){

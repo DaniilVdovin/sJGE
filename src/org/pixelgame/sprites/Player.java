@@ -1,12 +1,11 @@
 package org.pixelgame.sprites;
 
 import org.pixelgame.Engine.Core.Vector2;
-import org.pixelgame.Engine.graphics.Renderer;
 import org.pixelgame.Engine.input.Input;
-import org.pixelgame.Engine.object.Mob;
+import org.pixelgame.Engine.object.Sprite;
 import org.pixelgame.Engine.object.Text;
 import org.pixelgame.Engine.physics.Collision;
-import org.pixelgame.Engine.physics.Gravity;
+import org.pixelgame.Engine.physics.Physics;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -16,7 +15,7 @@ import static org.pixelgame.Engine.graphics.Renderer.MainCamera;
 /**
  * Class extends from Mob
  */
-public class Player extends Mob {
+public class Player extends Sprite {
     /**
      * @param id
      * @param posX
@@ -24,15 +23,14 @@ public class Player extends Mob {
      * @exception null
      * Create a Player object
      */
-    public Player(int id, int posX, int posY) {
-        super(id, posX, posY);
-        mass = 100;
+    private Physics physics;
+    public Player(int id, Vector2<Integer> pos) {
+        super(id, pos);
         SetSize(10,20);
         SetColor(Color.WHITE);
-        //SetImage("/image/player.png");
-
-        components.add(new Gravity(this));
-        components.add(new Collision(this,true));
+        physics = (Physics) AddComponent(new Physics(this));
+        AddComponent(new Collision(this));
+        physics.mass = 100;
     }
     /**
      * @param deltaTime
@@ -41,31 +39,27 @@ public class Player extends Mob {
      */
     @Override
     public void update(float deltaTime) {
-        MainCamera.position = Vector2.Lerp(MainCamera.position,position,deltaTime);
+        MainCamera.position = Vector2.Lerp(MainCamera.position.toFloat(),position.toFloat(),deltaTime);
         //Walk Left
         if(Input.getKey(KeyEvent.VK_A)){
-            velocity.x-=runSpeed;
+            physics.velocity.x-= physics.speed;
         }
         //Walk Right
         if(Input.getKey(KeyEvent.VK_D)){
-            velocity.x+=runSpeed;
+            physics.velocity.x+= physics.speed;
         }
         //Jump
-        if(_isGround & Input.getKey(KeyEvent.VK_SPACE)){
-            velocity.y = (float)-(Math.sqrt(50*mass));
+        if(physics._isGround & Input.getKey(KeyEvent.VK_SPACE)){
+            physics.velocity.y = (float)-(Math.sqrt(50*physics.mass));
         }
         //Fly
         if(Input.getKey(KeyEvent.VK_X)){
-            velocity.y = (float)-(Math.sqrt(50*mass));
-        }
-        //Mine
-        if(Input.getKey(KeyEvent.VK_E)){
-
+            physics.velocity.y = (float)-(Math.sqrt(50*physics.mass));
         }
         //DIE in Darkness
         if(position.y>1000)
         {
-            position = new Vector2(100,100);
+            position = new Vector2<>(100f,100f);
         }
         super.update(deltaTime);
     }

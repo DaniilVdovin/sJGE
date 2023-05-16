@@ -1,12 +1,12 @@
 package org.pixelgame.Engine.Core;
 
 import org.pixelgame.Engine.graphics.Renderer;
-import org.pixelgame.Engine.object.Component;
+import org.pixelgame.Engine.world.IUpdatable;
 import org.pixelgame.Engine.world.World;
 
 import java.awt.*;
 
-public abstract class GameApplication implements Component {
+public abstract class GameApplication implements IUpdatable {
     public void Init(){
         Renderer.init();
         World.curentWorld = new World();

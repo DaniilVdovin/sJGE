@@ -1,9 +1,6 @@
 package org.pixelgame.Engine.world;
 
 import org.pixelgame.Engine.Core.GameApplication;
-import org.pixelgame.Engine.Core.Logger;
-import org.pixelgame.Engine.Core.Vector2Int;
-import org.pixelgame.Engine.graphics.Renderer;
 import org.pixelgame.Engine.object.Sprite;
 import org.pixelgame.Engine.uitoolkit.CoreUI;
 

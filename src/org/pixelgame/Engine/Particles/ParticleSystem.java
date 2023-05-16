@@ -1,7 +1,6 @@
 package org.pixelgame.Engine.Particles;
 
 import org.pixelgame.Engine.Core.Vector2;
-import org.pixelgame.Engine.Core.Vector2Int;
 import org.pixelgame.Engine.object.Sprite;
 import org.pixelgame.Engine.object.Text;
 
@@ -9,7 +8,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-
+// FIXME: 16.05.2023
 public class ParticleSystem extends Sprite {
     private List<Particle> Particles = new ArrayList<>();
     private boolean Enable = false;
@@ -19,19 +18,8 @@ public class ParticleSystem extends Sprite {
     private int emut_count;
     private float temp_duration;
     public  boolean isDebug = false;
-    public ParticleSystem(){
-        this(0,0,0,10);
-    }
-    public ParticleSystem(int id,Vector2Int pos,float duration){
-        this(id,pos.x,pos.y,duration);
-    }
-    public ParticleSystem(int id, int posX, int posY) {
-        this(id,posX,posY,10);
-    }
-    public ParticleSystem(int id, int posX, int posY,float duration) {
-        super(id, posX, posY);
-        _isGravity = false;
-        mass = 0;
+    public ParticleSystem(int id, Vector2<Integer> pos,float duration) {
+        super(id, pos);
         SetSize(5);
         SetColor(Color.WHITE);
         this.duration = duration;
@@ -62,7 +50,7 @@ public class ParticleSystem extends Sprite {
     public void render(Graphics g) {
         super.render(g);
         if(isDebug){
-            Text stats = new Text(position.toInt().plusY(10).minusX(10));
+            Text stats = new Text(position.plusY(10).minusX(10).toInt());
             stats.Text.append("Particles: ").append(Particles.size()).append("\n")
                       .append("Duration: ").append(duration).append("\n")
                       .append("TDuration: ").append((int)temp_duration).append("\n");
@@ -101,7 +89,7 @@ public class ParticleSystem extends Sprite {
             rand.setSeed(new Date().getTime());
             Particle p =
                     new Particle(i
-                            ,position.plusX(rand.nextInt(20)-10)
+                            ,position.plusX(rand.nextInt(20)-10).toInt()
                             ,true
                             ,false
                             ,Color.RED
