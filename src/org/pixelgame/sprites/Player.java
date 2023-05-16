@@ -13,7 +13,17 @@ import java.awt.event.KeyEvent;
 
 import static org.pixelgame.Engine.graphics.Renderer.MainCamera;
 
+/**
+ * Class extends from Mob
+ */
 public class Player extends Mob {
+    /**
+     * @param id
+     * @param posX
+     * @param posY
+     * @exception null
+     * Create a Player object
+     */
     public Player(int id, int posX, int posY) {
         super(id, posX, posY);
         mass = 100;
@@ -24,6 +34,11 @@ public class Player extends Mob {
         components.add(new Gravity(this));
         components.add(new Collision(this,true));
     }
+    /**
+     * @param deltaTime
+     * update objcet per frame
+     * set control keys
+     */
     @Override
     public void update(float deltaTime) {
         MainCamera.position = Vector2.Lerp(MainCamera.position,position,deltaTime);
@@ -54,7 +69,11 @@ public class Player extends Mob {
         }
         super.update(deltaTime);
     }
-
+    /**
+     * @param g
+     * render g
+     * set debug text
+     */
     @Override
     public void render(Graphics g) {
         super.render(g);

@@ -16,7 +16,11 @@ import java.net.Proxy;
 import java.util.*;
 import java.util.List;
 
-public class Sprite extends Physics implements Component{
+/**
+ * Sprite is parent class for custom objects
+ * @see org.pixelgame.Engine.physics.Physics
+ */
+public class Sprite extends Physics {
     public int id = 0;
     public Vector2 position = Vector2.Zero();
     public int Width = 0,Height = 0;
@@ -25,15 +29,34 @@ public class Sprite extends Physics implements Component{
     public boolean isDebug = false;
     public ComponentList components = new ComponentList();
     public ArrayList<Sprite> Child = new ArrayList<>();
+
+    /**
+     * Constructor
+     * @param id
+     * @param posX
+     * @param posY
+     */
     public Sprite(int id,int posX,int posY){
         this.id = id;
         this.position.x = posX;
         this.position.y = posY;
     }
+
+    /**
+     * Constructor
+     * @param id
+     * @param pos
+     */
     public Sprite(int id,Vector2Int pos){
         this.id = id;
         this.position = pos;
     }
+
+    /**
+     * Constructor
+     * @param id
+     * @param pos
+     */
     public Sprite(int id,Vector2 pos){
         this.id = id;
         this.position = pos;
@@ -73,18 +96,41 @@ public class Sprite extends Physics implements Component{
             debug.render(g);
         }
     }
+
+    /**
+     * set Width and Height of this object
+     * @param width
+     * @param height
+     * @return changed object
+     */
     public Sprite SetSize(int width, int height){
         Width = width; Height = height;
         return this;
     }
+
+    /**
+     * set Size
+     * @param size
+     * @return squre
+     */
     public Sprite SetSize(int size){
        return SetSize(size,size);
     }
+
+    /**
+     * @param color
+     * @return changed object
+     */
     public Sprite SetColor(Color color){
         DefaultColor = color;
         image = null;
         return this;
     }
+
+    /**
+     * @param path
+     * @return changed object
+     */
     public Sprite SetImage(String path){
         try {
             image = Renderer.loadImage(path);
