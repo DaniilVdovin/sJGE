@@ -17,8 +17,10 @@ import org.pixelgame.Engine.uitoolkit.components.Chart;
 import org.pixelgame.Engine.uitoolkit.components.Grid;
 import org.pixelgame.Engine.uitoolkit.components.Series;
 import org.pixelgame.Engine.world.World;
+import org.pixelgame.sprites.Chest;
 import org.pixelgame.sprites.Grass;
 import org.pixelgame.sprites.Player;
+import org.pixelgame.sprites.Rock;
 
 public class GameApp extends GameApplication {
     @Override
@@ -30,19 +32,14 @@ public class GameApp extends GameApplication {
 
         for (int i = -20; i < 100; i++) {
             if(i%10==1){
-                Sprite s = new Sprite(i, 100+i*25,350).SetImage("/image/chest.png").SetSize(25);
-                s.mass = 50;
-                s.components.add(new Gravity(s));
-                s.components.add(new Collision(s));
-
-                objects.add(s);
+                objects.add(new Chest(i, 100+i*25,350));
             }
 
         }
         for (int i = -20; i < 100; i++) {
             objects.add(new Grass(i, 100+i*25,400).SetSize(25));
             for (int j = 0; j < 30; j++) {
-                objects.add(new Sprite(i, 100+i*25,400+(j*25)+25).SetSize(25).SetColor(Color.darkGray));
+                objects.add(new Rock( 100+i*25,400+(j*25)+25).SetSize(25).SetColor(Color.darkGray));
             }
         }
 
@@ -102,10 +99,13 @@ public class GameApp extends GameApplication {
         grid.Child.add(button);
         grid.Child.add(chart);
         CoreUI.uiComponents.add(grid);
-
         World.curentWorld.sprites.addAll(objects);
-    }
 
+    }
+    public void AddObject() {
+
+
+    }
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);

@@ -8,7 +8,7 @@ public abstract class Physics implements Component {
     public boolean _isStatic = false;
     protected boolean _isGravity = false;
     public boolean _isGround = false;
-    protected boolean Collision = false;
+
     public int mass = 0;
     public Vector2 velocity = Vector2.Zero();
 }

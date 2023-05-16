@@ -11,7 +11,7 @@ public class Collision implements Component {
     public boolean isEnable = true;
     public Sprite Object;
     public boolean isDebug = true;
-
+    public boolean isInterset = false;
     public Collision(Sprite object) {
         this(true, object, false);
     }
@@ -28,16 +28,23 @@ public class Collision implements Component {
 
     @Override
     public void update(float deltaTime) {
+
         if (isEnable) {
             Object._isGround = false;
             for (Sprite sprite : World.curentWorld.sprites) {
                 if (sprite == Object) continue;
                 if (!sprite._isBounds) continue;
+
+                //RECT
                 Rectangle rect = new Rectangle((int) (Object.position.x - Object.Width / 2),
                         (int) (Object.position.y + Object.velocity.y * deltaTime - Object.Height / 2), Object.Width, Object.Height);
+                //idk
+
                 Rectangle otherRect = new Rectangle((int) (sprite.position.x - sprite.Width / 2)
                         , (int) (sprite.position.y - sprite.Height / 2), sprite.Width, sprite.Height);
-                if (rect.intersects(otherRect)) {
+                //check TODO:Узнать почему это работает. ещё надо сделать лучше по хорошему поправить компонент лист
+                isInterset = rect.intersects(otherRect);
+                if (isInterset) {
                     Object._isGround = true;
                     if (!sprite._isStatic & sprite.mass <= Object.mass) {
                         sprite.velocity.y += (Object.velocity.y)*deltaTime*(sprite.position.y<Object.position.y?1:-1);
@@ -46,7 +53,9 @@ public class Collision implements Component {
                 }
                 rect = new Rectangle((int) (Object.position.x + Object.velocity.x * deltaTime - Object.Width / 2),
                         (int) (Object.position.y - Object.Height / 2), Object.Width, Object.Height);
-                if (rect.intersects(otherRect)) {
+                //check
+                if (isInterset) {
+                    //check
                     if (!sprite._isStatic & sprite.mass <= Object.mass) {
                         sprite.velocity.x += ((Object.velocity.x/2)/((float) (sprite.mass + Object.mass) /50));
                     }
