@@ -1,5 +1,5 @@
 package org.pixelgame.Engine.Core;
-
+//TODO: find case with generic and use it here
 public class Vector2Int extends Vector2{
     public int x,y;
     public Vector2Int() {
@@ -50,4 +50,13 @@ public class Vector2Int extends Vector2{
     public String toString() {
         return "("+ x +", " + y +')';
     }
+
+    public static Vector2Int Lerp(Vector2Int firstVector, Vector2Int secondVector, int by)
+    {
+        int retX = firstVector.x * (1 - by) + secondVector.x * by;
+        int retY = firstVector.y * (1 - by) + secondVector.y * by;
+        return new Vector2Int(retX, retY);
+    }
+    @Override
+    public Vector2Int clone() {return new Vector2Int(this.x,this.y);}
 }

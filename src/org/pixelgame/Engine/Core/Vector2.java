@@ -13,19 +13,44 @@ public class Vector2{
     public Vector2(float x, float y) {
         this.x = x;this.y = y;
     }
+
+    /**
+     *
+     * @return Vector2Int(x,y)
+     */
     public Vector2Int toInt(){
         return new Vector2Int(x,y);
     }
+
+    /**
+     * @return Vector2()
+     */
     public static Vector2 Zero(){
         return new Vector2();
     }
+
+    /**
+     *
+     * @return Vector2(1,1)
+     */
     public static Vector2 One(){
         return new Vector2(1,1);
     }
     //PLUS
+
+    /**
+     *
+     * @param b
+     * @return changed object
+     */
     public Vector2 plusEquals(Vector2 b){
         x+=b.x;y+=b.y; return this;
     }
+
+    /**
+     * @param b
+     * @return changed object
+     */
     public Vector2 plusEquals(int b){
         x+=b;y+=b; return this;
     }
@@ -66,6 +91,11 @@ public class Vector2{
         float retY = firstVector.y * (1 - by) + secondVector.y * by;
         return new Vector2(retX, retY);
     }
+
+    /**
+     * clone vector
+     * @return Vector2(this);
+     */
     public Vector2 clone(){
         return new Vector2(this);
     }
