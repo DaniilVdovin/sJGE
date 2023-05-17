@@ -21,6 +21,6 @@ public abstract class GameApplication implements IUpdatable {
     @Override
     public void render(Graphics g) {}
     public static void quit(){
-        System.exit(0);
+        //System.exit(0);
     }
 }

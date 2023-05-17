@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.pixelgame.EditorV2.Windows.MainWindow">
+  <grid id="27dc6" binding="frame" layout-manager="CardLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="974" height="670"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <splitpane id="3324c">
+        <constraints>
+          <card name="Card1"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="4ca1f" binding="object_tree_frame" layout-manager="CardLayout" hgap="0" vgap="0">
+            <constraints>
+              <splitpane position="left"/>
+            </constraints>
+            <properties>
+              <preferredSize width="200" height="700"/>
+            </properties>
+            <border type="none"/>
+            <children/>
+          </grid>
+          <grid id="bd229" binding="main_frame" layout-manager="CardLayout" hgap="0" vgap="2">
+            <constraints>
+              <splitpane position="right"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <splitpane id="27fee">
+                <constraints>
+                  <card name="Card1"/>
+                </constraints>
+                <properties>
+                  <orientation value="0"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <grid id="32f11" layout-manager="CardLayout" hgap="0" vgap="0">
+                    <constraints>
+                      <splitpane position="left"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <splitpane id="d333">
+                        <constraints>
+                          <card name="Card1"/>
+                        </constraints>
+                        <properties>
+                          <orientation value="0"/>
+                          <visible value="true"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <grid id="ad1f1" layout-manager="CardLayout" hgap="0" vgap="0">
+                            <constraints>
+                              <splitpane position="right"/>
+                            </constraints>
+                            <properties>
+                              <preferredSize width="500" height="200"/>
+                              <verifyInputWhenFocusTarget value="true"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <component id="76c7f" class="javax.swing.JTree" binding="tree1" default-binding="true">
+                                <constraints>
+                                  <card name="Card1"/>
+                                </constraints>
+                                <properties>
+                                  <dragEnabled value="true"/>
+                                </properties>
+                                <clientProperties>
+                                  <JTree.lineStyle class="java.lang.String" value=""/>
+                                </clientProperties>
+                              </component>
+                            </children>
+                          </grid>
+                          <grid id="67bef" layout-manager="CardLayout" hgap="0" vgap="0">
+                            <constraints>
+                              <splitpane position="left"/>
+                            </constraints>
+                            <properties/>
+                            <border type="none"/>
+                            <children>
+                              <splitpane id="39e90">
+                                <constraints>
+                                  <card name="Card1"/>
+                                </constraints>
+                                <properties>
+                                  <dividerSize value="5"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <tabbedpane id="dc71c" binding="tabbled_frame">
+                                    <constraints>
+                                      <splitpane position="left"/>
+                                    </constraints>
+                                    <properties>
+                                      <preferredSize width="1000" height="700"/>
+                                    </properties>
+                                    <border type="none"/>
+                                    <children>
+                                      <grid id="e0971" binding="tabble_editor_mode" layout-manager="CardLayout" hgap="0" vgap="0">
+                                        <constraints>
+                                          <tabbedpane title="Scene"/>
+                                        </constraints>
+                                        <properties/>
+                                        <border type="none"/>
+                                        <children/>
+                                      </grid>
+                                      <grid id="c3350" layout-manager="CardLayout" hgap="0" vgap="0">
+                                        <constraints>
+                                          <tabbedpane title="Untitled"/>
+                                        </constraints>
+                                        <properties/>
+                                        <border type="none"/>
+                                        <children/>
+                                      </grid>
+                                      <grid id="4247d" layout-manager="CardLayout" hgap="0" vgap="0">
+                                        <constraints>
+                                          <tabbedpane title="Untitled"/>
+                                        </constraints>
+                                        <properties/>
+                                        <border type="none"/>
+                                        <children/>
+                                      </grid>
+                                      <grid id="3b0c7" layout-manager="CardLayout" hgap="0" vgap="0">
+                                        <constraints>
+                                          <tabbedpane title="Untitled"/>
+                                        </constraints>
+                                        <properties/>
+                                        <border type="none"/>
+                                        <children/>
+                                      </grid>
+                                      <grid id="9ebd2" layout-manager="CardLayout" hgap="0" vgap="0">
+                                        <constraints>
+                                          <tabbedpane title="Untitled"/>
+                                        </constraints>
+                                        <properties/>
+                                        <border type="none"/>
+                                        <children/>
+                                      </grid>
+                                      <grid id="cf4fe" layout-manager="CardLayout" hgap="0" vgap="0">
+                                        <constraints>
+                                          <tabbedpane title="Untitled"/>
+                                        </constraints>
+                                        <properties/>
+                                        <border type="none"/>
+                                        <children/>
+                                      </grid>
+                                    </children>
+                                  </tabbedpane>
+                                  <scrollpane id="350e8">
+                                    <constraints>
+                                      <splitpane position="right"/>
+                                    </constraints>
+                                    <properties>
+                                      <preferredSize width="200" height="500"/>
+                                    </properties>
+                                    <border type="none"/>
+                                    <children>
+                                      <component id="aff69" class="javax.swing.JTable" binding="table1" default-binding="true">
+                                        <constraints/>
+                                        <properties/>
+                                      </component>
+                                    </children>
+                                  </scrollpane>
+                                </children>
+                              </splitpane>
+                            </children>
+                          </grid>
+                        </children>
+                      </splitpane>
+                    </children>
+                  </grid>
+                  <grid id="e18be" layout-manager="CardLayout" hgap="0" vgap="0">
+                    <constraints>
+                      <splitpane position="right"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="4d36b" class="javax.swing.JButton" binding="startGame">
+                        <constraints>
+                          <card name="Card1"/>
+                        </constraints>
+                        <properties>
+                          <text value="Start Game"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                </children>
+              </splitpane>
+            </children>
+          </grid>
+        </children>
+      </splitpane>
+    </children>
+  </grid>
+  <inspectionSuppressions>
+    <suppress inspection="NoLabelFor"/>
+  </inspectionSuppressions>
+</form>

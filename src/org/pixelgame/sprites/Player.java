@@ -1,5 +1,6 @@
 package org.pixelgame.sprites;
 
+import org.pixelgame.EditorV2.Windows.MainWindow;
 import org.pixelgame.Engine.Core.Vector2;
 import org.pixelgame.Engine.EventSystem.IOnCollisionListener;
 import org.pixelgame.Engine.input.Input;
@@ -13,6 +14,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 import static org.pixelgame.Engine.graphics.Renderer.MainCamera;
+
 
 /**
  * Class extends from Mob

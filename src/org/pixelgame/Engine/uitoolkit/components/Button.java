@@ -16,7 +16,6 @@ public class Button extends UIComponent implements MouseListener {
     }
     public Button(int layer, int width, int height, Vector2<Integer> position) {
         super(layer, width, height, position);
-        Renderer.canvas.addMouseListener(this);
     }
 
     @Override
