@@ -49,6 +49,7 @@ public class Collider implements IComponent, IUpdatable {
     public void setDebugMode(boolean value){
         _isDebug = value;
     }
+
     public Sprite GetParent(){
         return _parent;
     }

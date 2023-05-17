@@ -38,26 +38,27 @@ public class Collision extends CollisionEvent implements IComponent, IUpdatable 
     @Override
     public void update(float deltaTime) {
         if (isEnable) {
+
             _physics._isGround = false;
             for (Sprite sprite : World.curentWorld.sprites) {
                 if (sprite == _parent) continue;
-                Collision sc = ((Collision)sprite.GetComponent(Collision.class));
-                Physics sp = ((Physics)sprite.GetComponent(Physics.class));
-                if(sp == null) continue;
+                Collision spriteCollision = ((Collision)sprite.GetComponent(Collision.class));
+                Physics spritePhysics = ((Physics)sprite.GetComponent(Physics.class));
+                if(spritePhysics == null) continue;
                 if (_physics.GetCollider().GetPlus(_physics.velocity.y*deltaTime,PlusType.Y)
-                        .intersects(sp.GetCollider().Get())) {
+                        .intersects(spritePhysics.GetCollider().Get())) {
                     _physics._isGround = true;
-                    if (!sp._isStatic & sp.mass <= _physics.mass)
-                        sp.velocity.y += (_physics.velocity.y)*deltaTime*(sprite.position.y< _parent.position.y?1:-1);
+                    if (!spritePhysics._isStatic & spritePhysics.mass <= _physics.mass)
+                        spritePhysics.velocity.y += (_physics.velocity.y)*deltaTime*(sprite.position.y< _parent.position.y?1:-1);
                     _physics.velocity.y -= _physics.velocity.y;
                 }
                 if (_physics.GetCollider().GetPlus(_physics.velocity.x*deltaTime,PlusType.X)
-                        .intersects(sp.GetCollider().Get())) {
-                    collisionenter(sc);
-                    if (!sp._isStatic & sp.mass <= _physics.mass)
-                        sp.velocity.x += (_physics.velocity.x)*deltaTime*(sprite.position.x< _parent.position.x?1:-1);
+                        .intersects(spritePhysics.GetCollider().Get())) {
+                    collisionenter(spriteCollision);
+                    if (!spritePhysics._isStatic & spritePhysics.mass <= _physics.mass)
+                        spritePhysics.velocity.x += (_physics.velocity.x)*deltaTime*(sprite.position.x< _parent.position.x?1:-1);
                     _physics.velocity.x -= _physics.velocity.x;
-                }else collisionexit(sc);
+                }else collisionexit(spriteCollision);
             }
         }
     }
