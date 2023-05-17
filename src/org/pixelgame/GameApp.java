@@ -34,11 +34,6 @@ public class GameApp extends GameApplication {
             }
         }
         for (int i = -20; i < 100; i++) {
-            if(i%9==1){
-                objects.add(new Grass(i, new Vector2<>(100+i*25,380)));
-            }
-        }
-        for (int i = -20; i < 100; i++) {
             objects.add(new Grass(i, new Vector2<>(100+i*25,400)));
             for (int j = 0; j < 30; j++) {
                 objects.add(new Rock(i+j,new Vector2<>(100+i*25,400+(j*25)+25)));
@@ -46,6 +41,12 @@ public class GameApp extends GameApplication {
         }
 
         objects.add(new Player(-1,new Vector2<>(1200,40)));
+
+        for (int i = -20; i < 100; i++) {
+            if(i%9==1){
+                objects.add(new Grass(i, new Vector2<>(100+i*25,375)));
+            }
+        }
 
         Grid grid = new Grid(200,150,new Vector2<>(20,20));
         Button button = new Button(new Vector2<>(25,25));

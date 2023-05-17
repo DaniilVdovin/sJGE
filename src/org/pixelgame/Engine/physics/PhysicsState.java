@@ -7,9 +7,11 @@ enum PState{
     Stay
 }
 public class PhysicsState {
+    public Collider collider;
     public Physics physics;
     public PState state;
-    public PhysicsState(Physics physics, PState state) {
+    public PhysicsState(Collider collider,Physics physics, PState state) {
+        this.collider = collider;
         this.physics = physics;
         this.state = state;
     }
@@ -18,7 +20,7 @@ public class PhysicsState {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PhysicsState that = (PhysicsState) o;
-        return Objects.equals(physics, that.physics);
+        return Objects.equals(physics, that.physics) & Objects.equals(collider,that.collider);
     }
     @Override
     public int hashCode() {

@@ -91,6 +91,16 @@ public class Sprite implements IComplementable, IUpdatable {
     }
 
     @Override
+    public ArrayList GetComponents(Class component) {
+        var result = new ArrayList<>();
+        for (IUpdatable c:components) {
+            if(c.getClass().getCanonicalName().equals(component.getCanonicalName()))
+                result.add(component.cast(c));
+        }
+        return result;
+    }
+
+    @Override
     public IComponent AddComponent(IComponent component) {
         if(component instanceof IUpdatable) components.add((IUpdatable) component);
         return component;

@@ -31,7 +31,7 @@ public class Player extends Sprite {
         super(id, pos);
         SetSize(10,20);
         SetColor(Color.WHITE);
-        physics =     (Physics) AddComponent(new Physics(this));
+        physics   =     (Physics) AddComponent(new Physics(this,true));
         collision =   (Collision) AddComponent(new Collision(this,true));
         ((Collider)GetComponent(Collider.class)).setDebugMode(false);
         physics.mass = 50;
@@ -75,8 +75,5 @@ public class Player extends Sprite {
     @Override
     public void render(Graphics g) {
         super.render(g);
-        Text debug = new Text(position.toInt().minusY(50).minusX(20));
-        debug.Text.append("(").append(position.x).append(",").append(position.y).append(")");
-        debug.render(g);
     }
 }
