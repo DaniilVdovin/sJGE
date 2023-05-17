@@ -7,4 +7,5 @@ public class Event<T>{
     public final void addListener(T toAdd) {
         _listeners.add(toAdd);
     }
+    public final void removeListener(T toAdd) {_listeners.remove(toAdd);}
 }

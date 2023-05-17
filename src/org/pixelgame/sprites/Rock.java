@@ -15,6 +15,8 @@ public class Rock extends Sprite {
      */
     public Rock(int id, Vector2<Integer> pos) {
         super(id, pos);
+        SetSize(25);
+        SetColor(Color.DARK_GRAY);
     }
 
     @Override

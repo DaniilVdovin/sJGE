@@ -3,6 +3,7 @@ package org.pixelgame.sprites;
 import org.pixelgame.Engine.Core.Vector2;
 import org.pixelgame.Engine.graphics.SpriteImage;
 import org.pixelgame.Engine.object.Sprite;
+import org.pixelgame.Engine.physics.Collider;
 import org.pixelgame.Engine.physics.Collision;
 import org.pixelgame.Engine.physics.Physics;
 
@@ -13,7 +14,9 @@ public class Grass extends Sprite {
     public Grass(int id, Vector2<Integer> pos) {
         super(id, pos);
         SetImage(new SpriteImage("/image/grass.jpg"));
+        SetSize(25);
         physics = (Physics) AddComponent(new Physics(this));
+        ((Collider)GetComponent(Collider.class)).setDebugMode(true);
         physics._isStatic = true;
     }
     @Override

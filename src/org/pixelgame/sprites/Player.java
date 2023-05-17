@@ -1,9 +1,11 @@
 package org.pixelgame.sprites;
 
 import org.pixelgame.Engine.Core.Vector2;
+import org.pixelgame.Engine.EventSystem.IOnCollisionListener;
 import org.pixelgame.Engine.input.Input;
 import org.pixelgame.Engine.object.Sprite;
 import org.pixelgame.Engine.object.Text;
+import org.pixelgame.Engine.physics.Collider;
 import org.pixelgame.Engine.physics.Collision;
 import org.pixelgame.Engine.physics.Physics;
 
@@ -24,13 +26,15 @@ public class Player extends Sprite {
      * Create a Player object
      */
     private Physics physics;
+    private Collision collision;
     public Player(int id, Vector2<Integer> pos) {
         super(id, pos);
         SetSize(10,20);
         SetColor(Color.WHITE);
-        physics = (Physics) AddComponent(new Physics(this));
-        AddComponent(new Collision(this));
-        physics.mass = 100;
+        physics =     (Physics) AddComponent(new Physics(this));
+        collision =   (Collision) AddComponent(new Collision(this,true));
+        ((Collider)GetComponent(Collider.class)).setDebugMode(false);
+        physics.mass = 50;
     }
     /**
      * @param deltaTime

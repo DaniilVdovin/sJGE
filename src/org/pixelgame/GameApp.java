@@ -30,14 +30,18 @@ public class GameApp extends GameApplication {
 
         for (int i = -20; i < 100; i++) {
             if(i%10==1){
-                objects.add(new Chest(i, new Vector2<>(100+i*25,350)));
+                objects.add(new Chest(i, new Vector2<>(100+i*25,380)));
             }
-
         }
         for (int i = -20; i < 100; i++) {
-            objects.add(new Grass(i, new Vector2<>(100+i*25,400)).SetSize(25));
+            if(i%9==1){
+                objects.add(new Grass(i, new Vector2<>(100+i*25,380)));
+            }
+        }
+        for (int i = -20; i < 100; i++) {
+            objects.add(new Grass(i, new Vector2<>(100+i*25,400)));
             for (int j = 0; j < 30; j++) {
-                objects.add(new Rock(i+j,new Vector2<>(100+i*25,400+(j*25)+25)).SetSize(25).SetColor(Color.darkGray));
+                objects.add(new Rock(i+j,new Vector2<>(100+i*25,400+(j*25)+25)));
             }
         }
 
