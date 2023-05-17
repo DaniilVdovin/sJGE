@@ -29,8 +29,7 @@ public class Vector2<T extends Number>{
     }
     //PLUS
     /**
-     *
-     * @param b
+     * @param b is Vector2
      * @return changed object
      */
     public Vector2<T> plusEquals(Vector2<T> b){
@@ -40,7 +39,7 @@ public class Vector2<T extends Number>{
     }
 
     /**
-     * @param b
+     * @param b is int
      * @return changed object
      */
     public Vector2<T> plusEquals(int b){

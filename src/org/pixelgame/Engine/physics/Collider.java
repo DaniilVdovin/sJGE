@@ -17,6 +17,12 @@ public class Collider implements IComponent, IUpdatable {
                 parent.position.y.intValue() - parent.Height/2,
                 parent.Width,parent.Height),false);
     }
+    public Collider(Sprite parent,boolean isDebug){
+        this(parent,new Rectangle(
+                parent.position.x.intValue() - parent.Width/2,
+                parent.position.y.intValue() - parent.Height/2,
+                parent.Width,parent.Height),isDebug);
+    }
     public Collider(Sprite parent,Rectangle rect,boolean isDebug)
     {
         _isDebug = isDebug;
