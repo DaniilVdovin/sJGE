@@ -37,8 +37,17 @@ public abstract class GameApplication implements IUpdatable {
         CoreUI.uiComponents.add(ui);
         return ui;
     }
-    public void addUIElements(List<UIComponent> ui){
+    public void addUIElement(List<UIComponent> ui){
         CoreUI.uiComponents.addAll(ui);
+    }
+    public void removeObject(Sprite object){
+        World.curentWorld.sprites.remove(object);
+    }
+    public void removeObject(int id){
+        World.curentWorld.sprites.removeIf((x)->x.id == id);
+    }
+    public void removeObject(List<Sprite> objects){
+        World.curentWorld.sprites.removeAll(objects);
     }
     @Override
     public void update(float deltaTime) { }
