@@ -15,14 +15,19 @@ public class Game{
         //new MainWindow();
         //new GameApp().Init();
 
-        try {
-            GenerateObjectClass.addComponent(Collider.class);
-            GenerateObjectClass.addComponent(Physics.class);
-            GenerateObjectClass.addComponent(Collision.class);
-            GenerateObjectClass.addComponent(Sprite.class);
-            GenerateObjectClass.SaveFile("TestObject.java","org.pixelgame.sprites",GenerateObjectClass.Generate());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        new GenerateObjectClass()
+                    .setName("TestObject")
+                    .setPath("org.pixelgame.sprites")
+                    .addComponent(Collider.class)
+                    .addComponent(Physics.class)
+                    .addComponent(Collision.class,true)
+                    .addInitLogic(new StringBuilder().append("physics.mass = 50;\n"))
+                    .addInits(Integer.class, "HP",true,100)
+                    .addInits(String.class, "Name",true,"TTT")
+                    .addInits(String.class, "tempValue")
+                    .addSpriteImage("chest_open","/image/Chest_open.png")
+                    .addSpriteImage("chest_open","/image/Chest_open.png")
+                    .Generate()
+                    .SaveFile();
     }
 }
