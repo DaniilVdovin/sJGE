@@ -6,6 +6,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import org.pixelgame.Engine.Core.Vector2;
+import org.pixelgame.Engine.EventSystem.IOnClickListener;
 import org.pixelgame.Engine.graphics.Renderer;
 import org.pixelgame.Engine.graphics.SpriteImage;
 import org.pixelgame.Engine.object.Sprite;
@@ -29,31 +30,34 @@ public class GameApp extends GameApplication {
 
         Renderer.FIX_FRAME_RATE = false;
 
-        SpriteImage rock = new SpriteImage("/Tileset/png/Tiles/5.png");
-        SpriteImage grass = new SpriteImage("/Tileset/png/Tiles/2.png");
+        //SpriteImage rock =  new SpriteImage("/Images/grass.png"); //new SpriteImage("/Tileset/png/Tiles/5.png");
+        //SpriteImage grass = new SpriteImage("/Images/grass.png");//new SpriteImage("/Tileset/png/Tiles/2.png");
 
-        for (int i = -20; i < 100; i++) {
-            if(i%10==1){
-                objects.add(new Chest(i, new Vector2<>(100+i*25,350)));
-            }
-        }
-        for (int i = -20; i < 100; i++) {
-            objects.add(new Grass(i, new Vector2<>(100+i*25,400)).SetImage(grass));
-            for (int j = 0; j < 30; j++) {
-                objects.add(new Rock(i+j,new Vector2<>(100+i*25,400+(j*25)+25)).SetImage(rock));
-            }
-        }
-        objects.add(
-                new Sprite(0,new Vector2<>(1000,300))
-                        .SetImage(new SpriteImage("/Tileset/png/Object/Tree_2.png"))
-                        .SizeByImage(0.6f)
-        );
-        objects.add(new Player(-1,new Vector2<>(1200,40)));
+        //for (int i = -20; i < 100; i++) {
+        //    if(i%10==1){
+        //        objects.add(new Chest(i, new Vector2<>(100+i*25,350)));
+        //    }
+        //}
+        //for (int i = -20; i < 100; i++) {
+        //    objects.add(new Grass(i, new Vector2<>(100+i*25,400)).SetImage(grass));
+        //    for (int j = 0; j < 30; j++) {
+        //        objects.add(new Rock(i+j,new Vector2<>(100+i*25,400+(j*25)+25)).SetImage(rock));
+        //    }
+        //}
+        //objects.add(
+        //        new Sprite(0,new Vector2<>(1000,300))
+        //                .SetImage(new SpriteImage("/Tileset/png/Object/Tree_2.png"))
+        //                .SizeByImage(0.6f)
+        //);
+        //objects.add(new Player(-1,new Vector2<>(1200,40)));
 
 
         Grid grid = new Grid(200,150,new Vector2<>(20,20));
         Button button = new Button(new Vector2<>(25,25));
         button.Text = "Hello!";
+        button.addListener(() -> {
+            button.Text = "Clicked";
+        });
         grid.Child.add(button);
 
         Chart chart = new Chart(190,80,new Vector2<>(25,50));
