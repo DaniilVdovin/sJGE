@@ -1,8 +1,10 @@
 package org.pixelgame;
 
+import org.pixelgame.EditorV2.Core.GenerateObjectClass;
 import org.pixelgame.Engine.Core.GameApplication;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.pixelgame.Engine.Core.Vector2;
