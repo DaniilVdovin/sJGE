@@ -43,7 +43,12 @@ public class UIComponent extends ClickEvent implements IComponent, IUpdatable, M
     public boolean equals(Object obj) {
         return super.equals(obj);
     }
-
+    public void addChild(UIComponent ui){
+        Child.add(ui);
+    }
+    public void addChild(List<UIComponent> ui){
+        Child.addAll(ui);
+    }
     @Override
     public Sprite GetParent() {
         return null;

@@ -26,39 +26,35 @@ public class GameApp extends GameApplication {
     @Override
     public void Init() {
         super.Init();
-        ArrayList<Sprite> objects = new ArrayList<>();
-
         Renderer.FIX_FRAME_RATE = false;
-
-        //SpriteImage rock =  new SpriteImage("/Images/grass.png"); //new SpriteImage("/Tileset/png/Tiles/5.png");
-        //SpriteImage grass = new SpriteImage("/Images/grass.png");//new SpriteImage("/Tileset/png/Tiles/2.png");
-
-        //for (int i = -20; i < 100; i++) {
-        //    if(i%10==1){
-        //        objects.add(new Chest(i, new Vector2<>(100+i*25,350)));
-        //    }
-        //}
-        //for (int i = -20; i < 100; i++) {
-        //    objects.add(new Grass(i, new Vector2<>(100+i*25,400)).SetImage(grass));
-        //    for (int j = 0; j < 30; j++) {
-        //        objects.add(new Rock(i+j,new Vector2<>(100+i*25,400+(j*25)+25)).SetImage(rock));
-        //    }
-        //}
-        //objects.add(
-        //        new Sprite(0,new Vector2<>(1000,300))
-        //                .SetImage(new SpriteImage("/Tileset/png/Object/Tree_2.png"))
-        //                .SizeByImage(0.6f)
-        //);
-        //objects.add(new Player(-1,new Vector2<>(1200,40)));
-
-
+        MapGenerate();
+        UIGenerate();
+    }
+    public void MapGenerate(){
+        SpriteImage rock =  new SpriteImage("/image/grass.jpg");//new SpriteImage("/Tileset/png/Tiles/5.png");
+        SpriteImage grass = new SpriteImage("/image/grass.jpg");//new SpriteImage("/Tileset/png/Tiles/2.png")
+        for (int i = -20; i < 100; i++) {
+            if(i%10==1){
+                addObject(new Chest(i, new Vector2<>(100+i*25,350)));
+            }
+        }
+        for (int i = -20; i < 100; i++) {
+            addObject(new Grass(i, new Vector2<>(100+i*25,400)).SetImage(grass));
+            for (int j = 0; j < 30; j++) {
+                addObject(new Rock(i+j,new Vector2<>(100+i*25,400+(j*25)+25)).SetImage(rock));
+            }
+        }
+        addObject(new Player(-1,new Vector2<>(1200,40)));
+        addDone();
+    }
+    public void UIGenerate(){
         Grid grid = new Grid(200,150,new Vector2<>(20,20));
         Button button = new Button(new Vector2<>(25,25));
         button.Text = "Hello!";
         button.addListener(() -> {
             button.Text = "Clicked";
         });
-        grid.Child.add(button);
+        grid.addChild(button);
 
         Chart chart = new Chart(190,80,new Vector2<>(25,50));
         Series seriesRED = new Series();
@@ -74,14 +70,11 @@ public class GameApp extends GameApplication {
             public void render(Graphics g) {}
         };
         chart.addSeries(seriesRED);
-
-
-        grid.Child.add(button);
-        grid.Child.add(chart);
-        CoreUI.uiComponents.add(grid);
-        World.curentWorld.sprites.addAll(objects);
-
+        grid.addChild(button);
+        grid.addChild(chart);
+        addUIElement(grid);
     }
+
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);

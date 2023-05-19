@@ -23,6 +23,7 @@ public class Chart extends UIComponent {
     @Override
     public void update(float deltaTime) {
         for (Series series:ListSeries) {
+            if(series.component == null) continue;
             series.component.update(deltaTime);
         }
     }
@@ -30,6 +31,7 @@ public class Chart extends UIComponent {
     public void fixedupdate(float deltaTime)
     {
         for (Series series:ListSeries) {
+            if(series.component == null) continue;
             series.component.fixedupdate(deltaTime);
         }
     }
@@ -49,7 +51,8 @@ public class Chart extends UIComponent {
                         (int) (position.x+Width+(i-series.data.size())*5),
                         (int) (position.y+(series.data.get(i))*facH));
             }
-            series.component.render(g);
+            if(series.component == null) continue;
+                series.component.render(g);
         }
        //for (int i = data.size()-(data.size()>c?c:data.size()-1); i < data.size(); i++) {
        //    g.drawLine(
