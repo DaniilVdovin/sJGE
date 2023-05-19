@@ -13,10 +13,8 @@ public class Grass extends Sprite {
     Physics physics;
     public Grass(int id, Vector2<Integer> pos) {
         super(id, pos);
-        SetImage(new SpriteImage("/image/grass.jpg"));
         SetSize(25);
         physics = (Physics) AddComponent(new Physics(this));
-        ((Collider)GetComponent(Collider.class)).setDebugMode(true);
         physics._isStatic = true;
     }
     @Override

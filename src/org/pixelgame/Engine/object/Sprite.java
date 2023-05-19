@@ -66,6 +66,10 @@ public class Sprite implements IComplementable, IUpdatable {
     public Sprite SetSize(int size){
        return SetSize(size,size);
     }
+    public Sprite SizeByImage(float scale){
+        if(_image == null) throw new RuntimeException("Only after SetImage()");
+        return SetSize((int) (_image.Get().getWidth()*scale), (int) (_image.Get().getHeight()*scale));
+    }
     /**
      * @param color Base color
      * @return changed object

@@ -7,6 +7,7 @@ import org.pixelgame.Engine.input.Input;
 import org.pixelgame.Engine.world.World;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -19,7 +20,7 @@ public class Renderer {
     public static boolean FIX_FRAME_RATE = true;
     public static Camera MainCamera;
     private static CoreUI ui;
-    private static Frame frame;
+    public static Frame frame;
     public static Canvas canvas;
 
     private static int canvasWidth = 0;
@@ -38,7 +39,7 @@ public class Renderer {
     public static int currentFPS = 0;
     private static int totalFrames = 0;
 
-    private static void getBestSize(){
+    public static void getBestSize(){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenSize = toolkit.getScreenSize();
         //Dimension screenSize = frame.getSize();
@@ -73,51 +74,51 @@ public class Renderer {
         MainCamera.offSet = new Vector2<>(FrameWidth/2,FrameHeight/2).toFloat();
     }
 
-    private static void makeFullScreen(){
-        GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice graphicsDevice = environment.getDefaultScreenDevice();
+   private static void makeFullScreen(){
+       GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+       GraphicsDevice graphicsDevice = environment.getDefaultScreenDevice();
 
-        if(graphicsDevice.isFullScreenSupported()){
-            frame.setUndecorated(true);
-            graphicsDevice.setFullScreenWindow(frame);
-        }
-    }
+       if(graphicsDevice.isFullScreenSupported()){
+           frame.setUndecorated(true);
+           graphicsDevice.setFullScreenWindow(frame);
+       }
+   }
 
-    public static void init(){
-        frame = new Frame();
-        canvas = new Canvas();
-        MainCamera = new Camera();
+   public static void init(){
+       frame = new Frame("Game Mode");
+       canvas = new Canvas();
+       MainCamera = new Camera();
 
-        getBestSize();
-        canvas.setPreferredSize(new Dimension(canvasWidth,canvasHeigth));
+       getBestSize();
+       canvas.setPreferredSize(new Dimension(canvasWidth,canvasHeigth));
 
-        frame.add(canvas,0);
-        //makeFullScreen();
-        frame.pack();
-        frame.setResizable(true);
-        frame.setLocationRelativeTo(null);
+       frame.add(canvas,0);
+       //makeFullScreen();
+       frame.pack();
+       frame.setResizable(true);
+       frame.setLocationRelativeTo(null);
 
-        frame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                GameApplication.quit();
-            }
-        });
-        frame.addComponentListener(new ComponentAdapter() {
-            public void componentResized(ComponentEvent componentEvent) {
-                getBestSize();
-                canvas.setPreferredSize(new Dimension(canvasWidth,canvasHeigth));
-            }
-        });
+       frame.addWindowListener(new WindowAdapter() {
+           @Override
+           public void windowClosing(WindowEvent e) {
+               GameApplication.quit();
+           }
+       });
+       frame.addComponentListener(new ComponentAdapter() {
+           public void componentResized(ComponentEvent componentEvent) {
+               getBestSize();
+               canvas.setPreferredSize(new Dimension(canvasWidth,canvasHeigth));
+           }
+       });
 
-        frame.setVisible(true);
-        Input InputSystem = new Input();
-        canvas.addKeyListener(InputSystem);
-        canvas.addMouseMotionListener(InputSystem);
-        startRenderingGame();
-    }
+       frame.setVisible(true);
+       Input InputSystem = new Input();
+       canvas.addKeyListener(InputSystem);
+       canvas.addMouseMotionListener(InputSystem);
+       startRenderingGame();
+   }
 
-    private static void startRenderingGame(){
+    public static void startRenderingGame(){
         Thread thread = new Thread(){
             public void run(){
                 GraphicsConfiguration gc = canvas.getGraphicsConfiguration();

@@ -1,6 +1,10 @@
 package org.pixelgame.Engine.graphics;
+import org.pixelgame.EditorV2.Windows.MainWindow;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+
+import static org.pixelgame.Engine.graphics.Renderer.loadImage;
 
 public class SpriteImage{
     private final String _path;
@@ -8,7 +12,7 @@ public class SpriteImage{
     public SpriteImage(String path){
         this._path = path;
         try {
-            _image = Renderer.loadImage(path);
+            _image = loadImage(path);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

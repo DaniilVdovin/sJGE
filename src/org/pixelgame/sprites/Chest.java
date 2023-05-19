@@ -18,11 +18,11 @@ public class Chest extends Sprite {
 
     public Chest(int id, Vector2<Integer> pos) {
         super(id, pos);
-        SetSize(20);
-        Collider open_trigger = (Collider) AddComponent(new Collider(this,true));
+        SetSize(25);
+        Collider open_trigger = (Collider) AddComponent(new Collider(this,false));
         open_trigger.isTrigger = false;
         AddComponent(
-                new Collider(this,new Rectangle(pos.x,pos.y,Width+60,Height+30),true,true)
+                new Collider(this,new Rectangle(pos.x,pos.y,Width+60,Height+30),true,false)
                 .setOffset(new Vector2<>(30,30))
         );
         Physics physics = (Physics) AddComponent(new Physics(this));
@@ -30,7 +30,6 @@ public class Chest extends Sprite {
         SetImage(ChestSkin);
         physics.mass = 20;
         physics._isStatic = true;
-        collision.isDebug = true;
         collision.addListener(new IOnCollisionListener() {
             @Override
             public void CollisionEnter(Physics sender) {
