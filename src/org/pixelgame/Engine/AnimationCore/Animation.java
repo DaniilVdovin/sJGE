@@ -27,6 +27,7 @@ public class Animation extends AnimationEvent implements IUpdatable {
     protected void setSpriteImage(SpriteImage source){
 
     }
+
     @Override
     public void update(float deltaTime) {
 

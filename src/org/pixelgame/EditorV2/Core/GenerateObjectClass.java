@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class GenerateObjectClass {
-    private final String template = "package {PACKEGE};\n" +
+    private final String[] templates = {"package {PACKEGE};\n" +
                                            "\n" +
                                            "{IMPOERTS}\n" +
                                            "\n" +
@@ -37,7 +37,7 @@ public class GenerateObjectClass {
                                            "        super.render(g);\n" +
                                            "{RENDER}\n" +
                                            "    }\n" +
-                                           "}\n";
+                                           "}\n"};
     private StringBuilder IMPOERTS = new StringBuilder();
     private StringBuilder INITS = new StringBuilder();
     private StringBuilder SETDEFAULT = new StringBuilder();
@@ -51,10 +51,10 @@ public class GenerateObjectClass {
     private String Value;
 
     private boolean imagefirtstime = true;
-    public GenerateObjectClass Generate(){
+    public GenerateObjectClass Generate(int templateIndex){
         IMPOERTS        .append("import org.pixelgame.Engine.Core.Vector2;\n")
                         .append("import org.pixelgame.Engine.object.Sprite;\n");
-        Value = template
+        Value = templates[templateIndex]
                 .replace("{PACKEGE}",Path)
                 .replace("{IMPOERTS}",IMPOERTS)
                 .replace("{NAME}",Name)

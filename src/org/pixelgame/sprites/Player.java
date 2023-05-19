@@ -27,14 +27,14 @@ public class Player extends Sprite {
      * @exception null
      * Create a Player object
      */
-    private Physics physics;
-    private Collision collision;
+    private final Physics physics;
+
     public Player(int id, Vector2<Integer> pos) {
         super(id, pos);
         SetSize(10,20);
         SetColor(Color.WHITE);
         physics   =     (Physics) AddComponent(new Physics(this,true));
-        collision =   (Collision) AddComponent(new Collision(this,true));
+        AddComponent(new Collision(this, true));
         ((Collider)GetComponent(Collider.class)).setDebugMode(false);
         physics.mass = 50;
     }
