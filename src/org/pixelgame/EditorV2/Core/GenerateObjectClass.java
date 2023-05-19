@@ -119,8 +119,10 @@ public class GenerateObjectClass {
     public GenerateObjectClass addInits(Class type,String name,boolean isinit,Object defaultvalue){
         INITS.append("\tpublic ").append(type.getSimpleName()).append(" ").append(name);
                 if(isinit) {
-                    if (type.getSimpleName().equals(Integer.class.getSimpleName())){
+                    if (type.getSimpleName().equals(int.class.getSimpleName())){
                         INITS.append(" = ").append(defaultvalue).append(";\n");
+                    }else if (type.getSimpleName().equals(float.class.getSimpleName())){
+                        INITS.append(" = ").append(defaultvalue).append("f;\n");
                     }
                     else if (type.getSimpleName().equals(String.class.getSimpleName())){
                         INITS.append(" = \"").append(defaultvalue).append("\";\n");
@@ -131,11 +133,18 @@ public class GenerateObjectClass {
         return this;
     }
     public GenerateObjectClass addSpriteImage(String name,String path){
+        addSpriteImage(name,path,false);
+        return this;
+    }
+    public GenerateObjectClass addSpriteImage(String name,String path,boolean setOnInit){
         if(imagefirtstime){
             addImports("org.pixelgame.Engine.graphics.SpriteImage");
             imagefirtstime = false;
         }
         INITS.append("\tpublic final SpriteImage ").append(name).append(" = new SpriteImage(\"").append(path).append("\");\n");
+        if(setOnInit){
+            INITCODE.append("\t\t").append("SetImage(").append(name).append(");");
+        }
         return this;
     }
     public void SaveFile() {
