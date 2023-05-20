@@ -28,7 +28,7 @@ public class GameApp extends GameApplication {
     @Override
     public void Init() {
         super.Init();
-        Renderer.FIX_FRAME_RATE = false;
+        Renderer.FIX_FRAME_RATE = true;
         MapGenerate();
         UIGenerate();
     }

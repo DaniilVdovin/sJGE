@@ -1,8 +1,12 @@
 package org.pixelgame.sprites;
 
 import org.pixelgame.EditorV2.Windows.MainWindow;
+import org.pixelgame.Engine.AnimationCore.Animation;
+import org.pixelgame.Engine.AnimationCore.AnimationState;
 import org.pixelgame.Engine.Core.Vector2;
+import org.pixelgame.Engine.EventSystem.IOnAnimationListener;
 import org.pixelgame.Engine.EventSystem.IOnCollisionListener;
+import org.pixelgame.Engine.graphics.SpriteImage;
 import org.pixelgame.Engine.input.Input;
 import org.pixelgame.Engine.object.Sprite;
 import org.pixelgame.Engine.object.Text;
@@ -31,12 +35,30 @@ public class Player extends Sprite {
 
     public Player(int id, Vector2<Integer> pos) {
         super(id, pos);
-        SetSize(10,20);
-        SetColor(Color.WHITE);
+        SetImage(new SpriteImage("/image/char_atlas.png"));
+        SetSize(100);
         physics   =     (Physics) AddComponent(new Physics(this,true));
         AddComponent(new Collision(this, true));
         ((Collider)GetComponent(Collider.class)).setDebugMode(false);
         physics.mass = 50;
+        Animation animation = (Animation) AddComponent(
+                new Animation(this)
+                        .setAssetSource(new SpriteImage("/image/char_atlas.png"))
+                        .setParameters(0,1,true)
+                        .preload()
+        );
+        animation.addListener(new IOnAnimationListener() {
+            @Override
+            public void OnStateChange(AnimationState state) {
+                System.out.println("State: "+state.name());
+            }
+
+            @Override
+            public void OnComplete() {
+                System.out.println("Animation Complete");
+            }
+        });
+        animation.Play();
     }
     /**
      * @param deltaTime

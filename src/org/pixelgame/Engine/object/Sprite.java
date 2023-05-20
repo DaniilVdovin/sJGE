@@ -15,7 +15,7 @@ public class Sprite implements IComplementable, IUpdatable {
     public int id = 0;
     public Vector2<Float> position = new Vector2<>(0f,0f);
     public int Width = 0,Height = 0;
-    private SpriteImage _image = null;
+    public SpriteImage _image = null;
     private Color DefaultColor = Color.GREEN;
     public ArrayList<IUpdatable> components = new ArrayList<>();
     public ArrayList<Sprite> Child = new ArrayList<>();
