@@ -1,16 +1,12 @@
 package org.pixelgame.sprites;
 
-import org.pixelgame.EditorV2.Windows.MainWindow;
 import org.pixelgame.Engine.AnimationCore.Animation;
 import org.pixelgame.Engine.AnimationCore.AnimationState;
 import org.pixelgame.Engine.Core.Vector2;
 import org.pixelgame.Engine.EventSystem.IOnAnimationListener;
-import org.pixelgame.Engine.EventSystem.IOnCollisionListener;
 import org.pixelgame.Engine.graphics.SpriteImage;
 import org.pixelgame.Engine.input.Input;
 import org.pixelgame.Engine.object.Sprite;
-import org.pixelgame.Engine.object.Text;
-import org.pixelgame.Engine.physics.Collider;
 import org.pixelgame.Engine.physics.Collision;
 import org.pixelgame.Engine.physics.Physics;
 
@@ -24,24 +20,16 @@ import static org.pixelgame.Engine.graphics.Renderer.MainCamera;
  * Class extends from Mob
  */
 public class Player extends Sprite {
-    /**
-     * @param id
-     * @param posX
-     * @param posY
-     * @exception null
-     * Create a Player object
-     */
     private final Physics physics;
-
+    Animation animation;
     public Player(int id, Vector2<Integer> pos) {
         super(id, pos);
         SetImage(new SpriteImage("/image/char_atlas.png"));
-        SetSize(100);
+        SetSize(25,40);
         physics   =     (Physics) AddComponent(new Physics(this,true));
-        AddComponent(new Collision(this, true));
-        ((Collider)GetComponent(Collider.class)).setDebugMode(false);
+        AddComponent(new Collision(this));
         physics.mass = 50;
-        Animation animation = (Animation) AddComponent(
+        animation = (Animation) AddComponent(
                 new Animation(this)
                         .setAssetSource(new SpriteImage("/image/char_atlas.png"))
                         .setParameters(0,1,true)
@@ -70,10 +58,12 @@ public class Player extends Sprite {
         MainCamera.position = Vector2.Lerp(MainCamera.position.toFloat(),position.toFloat(),deltaTime);
         //Walk Left
         if(Input.getKey(KeyEvent.VK_A)){
+            animation.setOffset(new Vector2<>(20,195));
             physics.velocity.x-= physics.speed;
         }
         //Walk Right
         if(Input.getKey(KeyEvent.VK_D)){
+            animation.setOffset(new Vector2<>(20,295));
             physics.velocity.x+= physics.speed;
         }
         //Jump
