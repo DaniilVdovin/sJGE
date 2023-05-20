@@ -44,6 +44,9 @@ public class Animation extends AnimationEvent implements IComponent, IUpdatable 
         return this;
     }
     public Animation setOffset(Vector2<Integer> offset){
+        if (Offset.x.intValue() == offset.x.intValue() &
+            Offset.y.intValue() == offset.y.intValue())
+            return this;
         Offset = offset;
         preload();
         return this;
