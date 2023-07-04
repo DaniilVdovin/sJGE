@@ -28,7 +28,7 @@ public class GameApp extends GameApplication {
     @Override
     public void Init() {
         super.Init();
-        Renderer.FIX_FRAME_RATE = true;
+        Renderer.FIX_FRAME_RATE = false;
         MapGenerate();
         UIGenerate();
     }
@@ -42,9 +42,6 @@ public class GameApp extends GameApplication {
         }
         for (int i = -20; i < 100; i++) {
             addObject(new Grass(i, new Vector2<>(100+i*25,400)).SetImage(grass));
-            for (int j = 0; j < 30; j++) {
-                addObject(new Rock(i+j,new Vector2<>(100+i*25,400+(j*25)+25)).SetImage(rock));
-            }
         }
         addObject(new Player(-1,new Vector2<>(1200,40)));
         addDone();

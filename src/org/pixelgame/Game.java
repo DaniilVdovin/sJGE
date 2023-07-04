@@ -14,7 +14,6 @@ public class Game{
         //javax.swing.SwingUtilities.invokeLater(MainWindow::new);
         //new MainWindow();
         new GameApp().Init();
-
         //new GenerateObjectClass()
         //        .setName("TestObject")
         //        .setPath("org.pixelgame.sprites")
